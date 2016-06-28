@@ -17,6 +17,7 @@
 
 import sys
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
+from colors import bcolors
 
 
 #Check whether Tornado is installed or not
@@ -47,16 +48,17 @@ def torn():
 	CommandController(args.command)
 	
 def CommandController(command):
+	error = bcolors.FAIL+'Error:'+bcolors.ENDC
 	if command[0] == 'version':
 		raise SystemExit('Current version: '+__version__)
 	elif command[0] == 'new':
 		if len(command) == 1:
-			raise SystemExit('Error: Kindly specify name of the app.')
+			raise SystemExit(error+' Kindly specify name of the app.')
 		elif len(command) > 2:
-			raise SystemExit('Error: App names with spaces not allowed.')
+			raise SystemExit(error+' App names with spaces not allowed.')
 		#NewController(command[1])	
 	else:
-		raise SystemExit('Error: Enter valid command')
+		raise SystemExit(error+' Enter valid command')
 
 def main():
 	try:
