@@ -48,7 +48,15 @@ def torn():
 	
 def CommandController(command):
 	if command[0] == 'version':
-		print 'Current version : '+__version__	
+		raise SystemExit('Current version: '+__version__)
+	elif command[0] == 'new':
+		if len(command) == 1:
+			raise SystemExit('Error: Kindly specify name of the app.')
+		elif len(command) > 2:
+			raise SystemExit('Error: App names with spaces not allowed.')
+		#NewController(command[1])	
+	else:
+		raise SystemExit('Error: Enter valid command')
 
 def main():
 	try:
