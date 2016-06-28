@@ -18,6 +18,13 @@
 import sys
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 
+
+#Check whether Tornado is installed or not
+try:
+	import tornado
+except ImportError:
+	raise SystemExit('Tornado not installed, pip install tornado')
+
 __version__ = '0.0.1'
 description = ('Torn is tool for managing tornado web client.')
 epilog = ('The commands are:\n'
@@ -30,8 +37,7 @@ def torn():
 	arguments = ArgumentParser(prog="torn",formatter_class=RawDescriptionHelpFormatter,epilog=epilog,usage='%(prog)s command [arguments]')
 	arguments.add_argument("command", type=str,nargs='+', help="Specify what command to proceed")
 	args = arguments.parse_args()
-	if args.command:
-		print args.command
+	
 
 
 def main():
