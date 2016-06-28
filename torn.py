@@ -26,19 +26,29 @@ except ImportError:
 	raise SystemExit('Tornado not installed, pip install tornado')
 
 __version__ = '0.0.1'
-description = ('Torn is tool for managing tornado web client.')
+description = ('Torn is tool for managing tornado web client.\n'
+			   '---------------------------------------------')
 epilog = ('The commands are:\n'
 		  '\tnew\t\tCreate a Tornado Application\n'
 		  '\trun\t\trun the app and start a Web server for development\n'
-		  '\tapi\t\tcreate an API tornado application')
+		  '\tapi\t\tcreate an API tornado application\n'
+		  '\tversion\t\treturns the current version of torn')
 
 def torn():
-	print description+'\n'
+	print description
 	arguments = ArgumentParser(prog="torn",formatter_class=RawDescriptionHelpFormatter,epilog=epilog,usage='%(prog)s command [arguments]')
-	arguments.add_argument("command", type=str,nargs='+', help="Specify what command to proceed")
-	args = arguments.parse_args()
+	arguments.add_argument("command", type=str,nargs='+', help="Specify what command to proceed.")
+	options = arguments.parse_args()
+	if isinstance(options, tuple):
+		args = options[0]
+	else:
+		args = options
+	del options
+	CommandController(args.command)
 	
-
+def CommandController(command):
+	if command[0] == 'version':
+		print 'Current version : '+__version__	
 
 def main():
 	try:
