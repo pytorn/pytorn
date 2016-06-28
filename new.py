@@ -15,18 +15,49 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+"""
+Directory structure
+<app-name>
+ |-/conf
+ |------|-app.conf
+ |-/controllers
+ |------|-__init__.py
+ |------|-home.py
+ |------|-modules.py
+ |-/routes
+ |------|-__init__.py
+ |------|-routes.py
+ |-/views
+ |------|-home.html
+ |-/static
+ |------/css
+ |------/js
+ |------/fonts
+ |-/models
+ |------|-__init__.py
+ |-lastupdate.tmp
+ |-server.go
+"""
+
 import os
+from colors import bcolors
 
 """
 The Controller to create a new app
 """
 class NewController():
-	global CURRENT_DIR,NAME
+	NAME = ''
+	CURRENT_DIR = os.getcwd()
 	def __init__(self,name):
-		NAME = name
-		CURRENT_DIR = os.getcwd()
-		if os.path.isdir(CURRENT_DIR+'/'+NAME):
-			raise SystemExit("Directory named '"+NAME+"' already exists")
+		self.NAME = name
+		if os.path.isdir(self.CURRENT_DIR+'/'+self.NAME):
+			raise SystemExit(bcolors.FAIL+"Error:"+bcolors.ENDC+" Directory named '"+self.NAME+"' already exists")
 
 		#Creating the project directory
-		os.makedirs(CURRENT_DIR+'/'+NAME)
+		os.makedirs(self.CURRENT_DIR+'/'+self.NAME)
+		self.create()
+
+	def create(self):
+		os.chdir(self.CURRENT_DIR+'/'+self.NAME)
+		print bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' directory changed to '+bcolors.OKBLUE+bcolors.BOLD+self.NAME
+
