@@ -48,6 +48,8 @@ The Controller to create a new app
 class NewController():
 	NAME = ''
 	CURRENT_DIR = os.getcwd()
+	INFO = bcolors.OKBLUE+'INFO:'+bcolors.ENDC
+	SUCCESS = bcolors.OKGREEN+'SUCCESS:'+bcolors.ENDC
 	def __init__(self,name):
 		self.NAME = name
 		if os.path.isdir(self.CURRENT_DIR+'/'+self.NAME):
@@ -58,6 +60,18 @@ class NewController():
 		self.create()
 
 	def create(self):
-		os.chdir(self.CURRENT_DIR+'/'+self.NAME)
-		print bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' directory changed to '+bcolors.OKBLUE+bcolors.BOLD+self.NAME
+		path = self.CURRENT_DIR+'/'+self.NAME
+		os.chdir(path)
+		print self.INFO+' directory changed to '+bcolors.OKBLUE+self.NAME
+		dirlist = ["conf","controllers","routes","views","static","models"]
+		for dirs in dirlist:
+			os.makedirs(path+'/'+dirs)
+			print self.INFO+' '+dirs+' directory created'
+		subdirs = ["css","js","fonts"]
+		for dirs in subdirs:
+			os.makedirs(path+'/static/'+dirs)
+			print self.INFO+' static/'+dirs+' directory created'
+		print self.SUCCESS+' Directories created'
+
+
 
