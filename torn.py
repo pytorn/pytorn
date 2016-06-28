@@ -16,14 +16,23 @@
 #    under the License.
 
 import sys
-from argparse import ArgumentParser
+from argparse import ArgumentParser, RawDescriptionHelpFormatter
 
 __version__ = '0.0.1'
 description = ('Torn is tool for managing tornado web client.')
+epilog = ('The commands are:\n'
+		  '\tnew\t\tCreate a Tornado Application\n'
+		  '\trun\t\trun the app and start a Web server for development\n'
+		  '\tapi\t\tcreate an API tornado application')
 
 def torn():
-	arguments = ArgumentParser(description=description)
-	arguments.parse_args()
+	print description+'\n'
+	arguments = ArgumentParser(prog="torn",formatter_class=RawDescriptionHelpFormatter,epilog=epilog,usage='%(prog)s command [arguments]')
+	arguments.add_argument("command", type=str,nargs='+', help="Specify what command to proceed")
+	args = arguments.parse_args()
+	if args.command:
+		print args.command
+
 
 def main():
 	try:
