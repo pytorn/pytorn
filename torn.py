@@ -18,6 +18,7 @@
 import sys
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from colors import bcolors
+from new import NewController
 
 
 #Check whether Tornado is installed or not
@@ -37,8 +38,10 @@ epilog = ('The commands are:\n'
 
 def torn():
 	print description
-	arguments = ArgumentParser(prog="torn",formatter_class=RawDescriptionHelpFormatter,epilog=epilog,usage='%(prog)s command [arguments]')
-	arguments.add_argument("command", type=str,nargs='+', help="Specify what command to proceed.")
+	arguments = ArgumentParser(prog="torn",formatter_class=RawDescriptionHelpFormatter,
+							   epilog=epilog,usage='%(prog)s command [arguments]')
+	arguments.add_argument("command", type=str,nargs='+',
+						  	help="Specify what command to proceed.")
 	options = arguments.parse_args()
 	if isinstance(options, tuple):
 		args = options[0]
@@ -56,7 +59,7 @@ def CommandController(command):
 			raise SystemExit(error+' Kindly specify name of the app.')
 		elif len(command) > 2:
 			raise SystemExit(error+' App names with spaces not allowed.')
-		#NewController(command[1])	
+		NewController(command[1])	
 	else:
 		raise SystemExit(error+' Enter valid command')
 

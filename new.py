@@ -15,13 +15,18 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-#(http://stackoverflow.com/a/287944) referred from
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+import os
+
+"""
+The Controller to create a new app
+"""
+class NewController():
+	global CURRENT_DIR,NAME
+	def __init__(self,name):
+		NAME = name
+		CURRENT_DIR = os.getcwd()
+		if os.path.isdir(CURRENT_DIR+'/'+NAME):
+			raise SystemExit("Directory named '"+NAME+"' already exists")
+
+		#Creating the project directory
+		os.makedirs(CURRENT_DIR+'/'+NAME)
