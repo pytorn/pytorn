@@ -1,0 +1,4 @@
+[console_scripts]
+torn = torn:main
+torn-cli = torn:main
+

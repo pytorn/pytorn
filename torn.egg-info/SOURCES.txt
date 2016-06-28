@@ -1,0 +1,8 @@
+README.rst
+setup.py
+torn.py
+torn.egg-info/PKG-INFO
+torn.egg-info/SOURCES.txt
+torn.egg-info/dependency_links.txt
+torn.egg-info/entry_points.txt
+torn.egg-info/top_level.txt
