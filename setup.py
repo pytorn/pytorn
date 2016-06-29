@@ -59,7 +59,7 @@ setup(
     author_email='shubhodeep9@gmail.com',
     url='https://github.com/shubhodeep9/torn',
     license='Apache License, Version 2.0',
-    py_modules=["torn","newapp","colors"],
+    py_modules=["torn","newapp","colors","apiapp"],
     entry_points={
         'console_scripts': [
             'torn=torn:main',

@@ -19,6 +19,7 @@ import sys
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from colors import bcolors
 from newapp import NewController
+from apiapp import APIController
 import os
 
 #Check whether Tornado is installed or not
@@ -84,6 +85,12 @@ def CommandController(command):
 		print bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' Use Ctrl-C to exit'
 		from subprocess import call
 		call(["python", "server.py"])
+	elif command[0] == 'api':
+		if len(command) == 1:
+			raise SystemExit(error+' Kindly specify name of the api.')
+		elif len(command) > 2:
+			raise SystemExit(error+' API names with spaces not allowed.')
+		APIController(command[0])
 	else:
 		raise SystemExit(error+' Enter valid command')
 
