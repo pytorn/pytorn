@@ -3,6 +3,10 @@ torn
 
 torn-cli : A command line application to easily create and run tornado applications.
 
+Change log
+----------
+Fixed tornado missing issue.
+
 
 Versions
 --------

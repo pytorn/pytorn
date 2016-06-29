@@ -59,6 +59,7 @@ setup(
     author_email='shubhodeep9@gmail.com',
     url='https://github.com/shubhodeep9/torn',
     license='Apache License, Version 2.0',
+    install_requires=["tornado>=4.3.0"],
     py_modules=["torn","newapp","colors","apiapp"],
     entry_points={
         'console_scripts': [

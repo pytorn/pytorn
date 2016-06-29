@@ -28,7 +28,7 @@ try:
 except ImportError:
 	raise SystemExit('Tornado not installed, pip install tornado')
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 description = ('Torn is tool for managing tornado web client.\n'
 			   '---------------------------------------------')
 epilog = ('The commands are:\n'
