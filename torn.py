@@ -90,7 +90,7 @@ def CommandController(command):
 			raise SystemExit(error+' Kindly specify name of the api.')
 		elif len(command) > 2:
 			raise SystemExit(error+' API names with spaces not allowed.')
-		APIController(command[0])
+		APIController(command[1])
 	else:
 		raise SystemExit(error+' Enter valid command')
 
