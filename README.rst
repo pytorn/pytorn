@@ -15,7 +15,7 @@ Installation
 
 ::
 
-	python setup.py install
+	pip install torn
 
 or
 

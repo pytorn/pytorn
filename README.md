@@ -13,7 +13,7 @@ torn-cli works with Python 2.4-3.5
 Installation
 ------------
 
-	python setup.py install
+	pip install torn
 
 or
 
