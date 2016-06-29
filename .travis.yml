@@ -8,14 +8,9 @@ addons:
     sources:
       - deadsnakes
     packages:
-      - python2.4
-      - python2.5
       - python2.6
-      - pypy
 
 env:
- - TOXENV=py24
- - TOXENV=py25
  - TOXENV=py26
  - TOXENV=py27
  - TOXENV=flake8
