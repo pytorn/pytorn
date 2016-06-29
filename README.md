@@ -1,4 +1,4 @@
-torn
+torn   [![Build Status](https://travis-ci.org/shubhodeep9/torn.svg?branch=master)](https://travis-ci.org/shubhodeep9/torn)
 ====
 
 torn-cli : A command line application to easily create and run tornado applications.
