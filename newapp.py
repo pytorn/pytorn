@@ -66,12 +66,90 @@ class NewController():
 		dirlist = ["conf","controllers","routes","views","static","models"]
 		for dirs in dirlist:
 			os.makedirs(path+'/'+dirs)
-			print self.INFO+' '+dirs+' directory created'
+			print self.INFO+' "'+dirs+'" directory created'
 		subdirs = ["css","js","fonts"]
 		for dirs in subdirs:
 			os.makedirs(path+'/static/'+dirs)
-			print self.INFO+' static/'+dirs+' directory created'
+			print self.INFO+' "static/'+dirs+'" directory created'
 		print self.SUCCESS+' Directories created'
+		self.write()
+
+	def write(self):
+		writings = {
+				"conf/app.conf":"name = "+self.NAME+"\nport = 8000\ndebug = True",
+				"controllers/__init__.py":("""'''
+The controller initialization script
+Imports all the files in the folder directly
+To import modules, kindly include them in modules.py in the current folder
+'''
+
+from os.path import dirname,basename, isfile
+import glob
+modules = glob.glob(dirname(__file__)+"/*.py")
+__all__ = [basename(f)[:-3] for f in modules if isfile(f) and basename(f)!="__init__.py" and basename(f)!="modules.py"]
+
+from . import *"""),
+				"controllers/home.py":("""
+'''
+Preset controller by torn for / route
+'''
+from modules import *
+class homeHandler(tornado.web.RequestHandler):
+	def get(self):
+		self.write('Welcome to Tornado Application')
+					"""),
+				"controllers/modules.py":("""
+'''
+Middleware for controller to contain all the modules
+'''
+import tornado.web
+					"""),
+				"routes/__init__.py":"from routes import *",
+				"routes/routes.py":("""
+from controllers import *
+route = [
+		(
+			r"/",
+			home.homeHandler
+		)
+]
+					"""),
+				"server.py":("""
+'''
+The main server file
+'''
+from tornado.web import RequestHandler, Application
+from tornado.httpserver import HTTPServer
+from tornado.ioloop import IOLoop
+import os
+import torn
+
+from routes import *
+settings = dict(
+		template_path = os.path.join(os.path.dirname(__file__), "views"),
+		static_path = os.path.join(os.path.dirname(__file__), "static"),
+		debug=torn.Debug(),
+	)
+
+application = Application(route, **settings)
+
+if __name__ == "__main__":
+	server = HTTPServer(application)
+	server.listen(torn.Port)
+	IOLoop.current().start()
+
+					""")
+		}
+		path = self.CURRENT_DIR+'/'+self.NAME
+		os.chdir(path)
+		for i in writings:
+			conf = open(i,'w')
+			conf.write(writings[i])
+			print self.INFO+' "'+i+'" file created and done.'
+		print self.SUCCESS+' Application created'
+		print self.INFO+' USAGE: torn run (inside the app directory)'
+
+
 
 
 

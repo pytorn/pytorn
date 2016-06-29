@@ -1,3 +1,0 @@
-/usr/local/lib/python2.7/dist-packages/torn-0.0.1-py2.7.egg
-/usr/local/bin/torn
-/usr/local/bin/torn-cli

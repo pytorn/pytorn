@@ -23,12 +23,6 @@ or
 
 	pip install git+https://github.com/shubhodeep9/torn.git
 
-or
-
-::
-
-    git clone https://github.com/shubhodeep9/torn.git
-    python torn/setup.py install
 
 Usage
 -----
