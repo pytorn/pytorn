@@ -81,6 +81,7 @@ def CommandController(command):
 		if not AppExist():
 			raise SystemExit(error+' not an app directory, try $ cd <app-dest>')
 		print bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' web server running at '+str(Port())
+		print bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' Use Ctrl-C to exit'
 		from subprocess import call
 		call(["python", "server.py"])
 	else:
