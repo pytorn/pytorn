@@ -35,7 +35,6 @@ Directory structure
  |------/fonts
  |-/models
  |------|-__init__.py
- |-lastupdate.tmp
  |-server.go
 """
 
@@ -147,6 +146,28 @@ if __name__ == "__main__":
 			conf.write(writings[i])
 			print self.INFO+' "'+i+'" file created and done.'
 		print self.SUCCESS+' Application created'
+		print """
+Directory structure
+%s
+ |-/conf
+ |------|-app.conf
+ |-/controllers
+ |------|-__init__.py
+ |------|-home.py
+ |------|-modules.py
+ |-/routes
+ |------|-__init__.py
+ |------|-routes.py
+ |-/views
+ |------|-home.html
+ |-/static
+ |------/css
+ |------/js
+ |------/fonts
+ |-/models
+ |------|-__init__.py
+ |-server.go
+""" % (self.NAME)
 		print self.INFO+' USAGE: torn run (inside the app directory)'
 
 

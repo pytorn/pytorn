@@ -45,6 +45,14 @@ def Debug():
 	print bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' reading configuration file for DEBUG and PORT values'
 	return f.split('\n')[2].split('=')[1].strip() == 'True'
 
+#to check if directory is application or not
+def AppExist():
+	try:
+		f = open('conf/app.conf','r').read()
+		return f.split('\n')[0].split('=')[0].strip() == 'name'
+	except:
+		return False
+
 def torn():
 	print description
 	arguments = ArgumentParser(prog="torn",formatter_class=RawDescriptionHelpFormatter,
@@ -68,7 +76,13 @@ def CommandController(command):
 			raise SystemExit(error+' Kindly specify name of the app.')
 		elif len(command) > 2:
 			raise SystemExit(error+' App names with spaces not allowed.')
-		NewController(command[1])	
+		NewController(command[1])
+	elif command[0] == 'run':
+		if not AppExist():
+			raise SystemExit(error+' not an app directory, try $ cd <app-dest>')
+		print bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' web server running at '+str(Port())
+		from subprocess import call
+		call(["python", "server.py"])
 	else:
 		raise SystemExit(error+' Enter valid command')
 
