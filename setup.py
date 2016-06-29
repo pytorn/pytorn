@@ -18,7 +18,7 @@
 import os
 import re
 import codecs
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 here = os.path.abspath(os.path.dirname(__file__))
@@ -59,11 +59,7 @@ setup(
     author_email='shubhodeep9@gmail.com',
     url='https://github.com/shubhodeep9/torn',
     license='Apache License, Version 2.0',
-    py_modules=[
-    		'torn',
-    		'colors',
-    		'new'
-    		],
+    py_modules=["torn","new","colors"],
     entry_points={
         'console_scripts': [
             'torn=torn:main',

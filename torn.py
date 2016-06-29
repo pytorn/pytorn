@@ -18,7 +18,7 @@
 import sys
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from colors import bcolors
-from new import NewController
+from newapp import NewController
 
 
 #Check whether Tornado is installed or not
