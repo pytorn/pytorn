@@ -134,7 +134,7 @@ application = Application(route, **settings)
 
 if __name__ == "__main__":
 	server = HTTPServer(application)
-	server.listen(torn.Port)
+	server.listen(int(torn.Port))
 	IOLoop.current().start()
 
 					""")
