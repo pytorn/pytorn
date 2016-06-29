@@ -19,7 +19,7 @@ import sys
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from colors import bcolors
 from newapp import NewController
-
+import os
 
 #Check whether Tornado is installed or not
 try:
@@ -35,6 +35,15 @@ epilog = ('The commands are:\n'
 		  '\trun\t\trun the app and start a Web server for development\n'
 		  '\tapi\t\tcreate an API tornado application\n'
 		  '\tversion\t\treturns the current version of torn')
+
+def Port():
+	f = open('conf/app.conf','r').read()
+	return int(f.split('\n')[1].split('=')[1].strip())
+
+def Debug():
+	f = open('conf/app.conf','r').read()
+	print bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' reading configuration file for DEBUG and PORT values'
+	return f.split('\n')[2].split('=')[1].strip() == 'True'
 
 def torn():
 	print description
