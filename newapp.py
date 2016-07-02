@@ -61,16 +61,16 @@ class NewController():
 	def create(self):
 		path = self.CURRENT_DIR+'/'+self.NAME
 		os.chdir(path)
-		print self.INFO+' directory changed to '+bcolors.OKBLUE+self.NAME
+		print(self.INFO+' directory changed to '+bcolors.OKBLUE+self.NAME)
 		dirlist = ["conf","controllers","routes","views","static","models"]
 		for dirs in dirlist:
 			os.makedirs(path+'/'+dirs)
-			print self.INFO+' "'+dirs+'" directory created'
+			print(self.INFO+' "'+dirs+'" directory created')
 		subdirs = ["css","js","fonts"]
 		for dirs in subdirs:
 			os.makedirs(path+'/static/'+dirs)
-			print self.INFO+' "static/'+dirs+'" directory created'
-		print self.SUCCESS+' Directories created'
+			print(self.INFO+' "static/'+dirs+'" directory created')
+		print(self.SUCCESS+' Directories created')
 		self.write()
 
 	def write(self):
@@ -144,9 +144,9 @@ if __name__ == "__main__":
 		for i in writings:
 			conf = open(i,'w')
 			conf.write(writings[i])
-			print self.INFO+' "'+i+'" file created and done.'
-		print self.SUCCESS+' Application created'
-		print """
+			print(self.INFO+' "'+i+'" file created and done.')
+		print(self.SUCCESS+' Application created')
+		print("""
 Directory structure
 %s
  |-/conf
@@ -167,8 +167,8 @@ Directory structure
  |-/models
  |------|-__init__.py
  |-server.go
-""" % (self.NAME)
-		print self.INFO+' USAGE: torn run (inside the app directory)'
+""" % (self.NAME))
+		print(self.INFO+' USAGE: torn run (inside the app directory)')
 
 
 

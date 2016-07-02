@@ -43,7 +43,7 @@ def Port():
 
 def Debug():
 	f = open('conf/app.conf','r').read()
-	print bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' reading configuration file for DEBUG and PORT values'
+	print(bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' reading configuration file for DEBUG and PORT values')
 	return f.split('\n')[2].split('=')[1].strip() == 'True'
 
 #to check if directory is application or not
@@ -55,7 +55,9 @@ def AppExist():
 		return False
 
 def torn():
-	print description
+	print(description)
+	if len(sys.argv) == 1:
+		sys.argv.append('-h')
 	arguments = ArgumentParser(prog="torn",formatter_class=RawDescriptionHelpFormatter,
 							   epilog=epilog,usage='%(prog)s command [arguments]')
 	arguments.add_argument("command", type=str,nargs='+',
@@ -81,8 +83,8 @@ def CommandController(command):
 	elif command[0] == 'run':
 		if not AppExist():
 			raise SystemExit(error+' not an app directory, try $ cd <app-dest>')
-		print bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' web server running at '+str(Port())
-		print bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' Use Ctrl-C to exit'
+		print(bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' web server running at '+str(Port()))
+		print(bcolors.OKBLUE+'INFO:'+bcolors.ENDC+' Use Ctrl-C to exit')
 		from subprocess import call
 		call(["python", "server.py"])
 	elif command[0] == 'api':
@@ -98,7 +100,7 @@ def main():
 	try:
 		torn()
 	except KeyboardInterrupt:
-		print '\nTerminating process'
+		print('\nTerminating process')
 
 if __name__ == '__main__':
 	main()
