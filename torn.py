@@ -20,6 +20,7 @@ from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from colors import bcolors
 from newapp import NewController
 from apiapp import APIController
+from createController import createNewController
 import os
 
 #Check whether Tornado is installed or not
@@ -35,7 +36,8 @@ epilog = ('The commands are:\n'
 		  '\tnew\t\tCreate a Tornado Application\n'
 		  '\trun\t\trun the app and start a Web server for development\n'
 		  '\tapi\t\tcreate an API tornado application\n'
-		  '\tversion\t\treturns the current version of torn')
+		  '\tversion\t\treturns the current version of torn\n'
+		  '\tcreate controller controllerName\t\tcreates a controller')
 
 def Port():
 	f = open('conf/app.conf','r').read()
@@ -93,6 +95,10 @@ def CommandController(command):
 		elif len(command) > 2:
 			raise SystemExit(error+' API names with spaces not allowed.')
 		APIController(command[1])
+	elif command[0] == 'create':
+		if(command[1] == 'controller'):
+			createNewController(command[2])
+
 	else:
 		raise SystemExit(error+' Enter valid command')
 
