@@ -98,6 +98,8 @@ def CommandController(command):
 	elif command[0] == 'create':
 		if(command[1] == 'controller'):
 			createNewController(command[2])
+		else:
+			raise SystemExit('As of now, you can only create controllers\nTo create one, type:\n torn create controller controllerName')
 
 	else:
 		raise SystemExit(error+' Enter valid command')
