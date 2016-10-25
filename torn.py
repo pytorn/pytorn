@@ -37,7 +37,7 @@ epilog = ('The commands are:\n'
 		  '\trun\t\trun the app and start a Web server for development\n'
 		  '\tapi\t\tcreate an API tornado application\n'
 		  '\tversion\t\treturns the current version of torn\n'
-		  '\tcreate controller controllerName\t\tcreates a controller')
+		  '\tcreate controller controllerName methods\t\tcreates a controller')
 
 def Port():
 	f = open('conf/app.conf','r').read()
@@ -97,7 +97,7 @@ def CommandController(command):
 		APIController(command[1])
 	elif command[0] == 'create':
 		if(command[1] == 'controller'):
-			createNewController(command[2])
+			createNewController(command)
 		else:
 			raise SystemExit('As of now, you can only create controllers\nTo create one, type:\n torn create controller controllerName')
 
