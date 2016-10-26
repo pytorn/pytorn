@@ -82,4 +82,4 @@ class createNewController():
 				with open(routesDirectory+"routes.py", "w") as routesFile:
 					routesFile.write(routesFileContent)
 		else:
-			print ('Sorry, this route already exists. Try renaming your Controller.')
+			print ('Sorry, this controller already exists. Try renaming your Controller.')
