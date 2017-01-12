@@ -69,6 +69,7 @@ class NewController():
 		subdirs = ["css","js","fonts"]
 		for dirs in subdirs:
 			os.makedirs(path+'/static/'+dirs)
+			os.mknod(path+'/static/'+dirs+'/.gitkeep')
 			print(self.INFO+' "static/'+dirs+'" directory created')
 		print(self.SUCCESS+' Directories created')
 		self.write()
