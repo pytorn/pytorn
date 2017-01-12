@@ -65,6 +65,7 @@ class APIController():
 		dirlist = ["conf","controllers","routes","models"]
 		for dirs in dirlist:
 			os.makedirs(path+'/'+dirs)
+			os.makenod(path+'/'+dirs+'/.gitkeep')
 			print(self.INFO+' "'+dirs+'" directory created')
 		print(self.SUCCESS+' Directories created')
 		self.write()
