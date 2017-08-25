@@ -16,7 +16,7 @@
 #    under the License.
 
 #(http://stackoverflow.com/a/287944) referred from
-class bcolors:
+class BColors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
