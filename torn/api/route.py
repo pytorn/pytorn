@@ -1,7 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-class Routing:
+import tornado.routing.Router
+import __init__ as api
 
-	def add(self, uri, controller):
-		print (uri)
+class Routing(tornado.routing.Router):
+
+    def __init__(self, app):
+        self.app = app
+
+    def _add(self, uri, controller):
+        print (uri)
+
+    def get(self, uri, controller):
+        self._add('GET', uri, controller)
+
+    def post(self, uri, controller):
+        self._add('POST', uri, controller)
