@@ -9,7 +9,7 @@ class Routing(tornado.routing.Router):
     def __init__(self, app):
         self.app = app
 
-    def _add(self, uri, controller):
+    def _add(self, method, uri, controller):
         print (uri)
 
     def get(self, uri, controller):
