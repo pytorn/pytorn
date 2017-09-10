@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import tornado.routing.Router
-import __init__ as api
+from __init__ import *
 
 class Router(tornado.routing.Router):
-    def __init__(self, app):
+    def __init__(self, app, routes):
         self.app = app
         self.map_handlers = {
             'GET'       : GetResource,
@@ -14,13 +14,14 @@ class Router(tornado.routing.Router):
             'PATCH'     : PatchResource,
             'DELETE'    : DeleteResource
         }
+        self.routes = routes
 
     def find_handler(self, request, **kwargs):
         try:
             handler = self.map_handlers[request.method]
         except:
             handler = MethodNotAllowedResource
-        return self.app.get_handler_delegate(request, handler, path_args=[request.path])
+        return self.app.get_handler_delegate(request, handler, path_args=[request.path, self.routes])
 
 class Routing:
     def __init__(self):

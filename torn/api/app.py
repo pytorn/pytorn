@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 import os, sys
 import tornado.web
+import tornado.ioloop
 import tornado.httpserver
-from .route import Routing
+from .route import Routing, Router
 from ..plugins import app
 
 class Application:
@@ -13,8 +14,12 @@ class Application:
 		self.root_dir = os.getcwd()
 		# gonna read settings from Config/config.json
 		self = app.settings(self)
-		handlers = _gethandlers()
-		tornado.web.Application.__init__(self, handlers)
+		self.routes = route.routes
+
 
 	def run(self):
-		http_server = tornado.httpserver.HTTPServer(self)
+		application = tornado.web.Application()
+		router = Router(application, self.routes)
+		http_server = tornado.httpserver.HTTPServer(router)
+		http_server.listen(self.port)
+		tornado.ioloop.IOLoop.current().start()
