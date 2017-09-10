@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from torn.api.app import Application
-from Routes import web
+import Routes.web
 
 def run():
-	app = Application(route = web.route)
-	app.run()
+	app = Application()
+	app.run(routes = Routes.web.route.routes)
 
 if __name__ == '__main__':
 	run()

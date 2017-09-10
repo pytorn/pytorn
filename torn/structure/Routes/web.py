@@ -2,8 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from torn.api.route import Routing
-from ..Controller import *
+import sys
+sys.path.append("..")
+from Controller import *
 
 route = Routing()
 
-route.add('/', MainController.index)
+route.get('/', MainController)
+route.get('/404', NotFoundController)

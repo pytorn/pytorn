@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import tornado.routing.Router
-from __init__ import *
+import tornado.routing
+from torn.api import *
+import torn.plugins.app
 
 class Router(tornado.routing.Router):
     def __init__(self, app, routes):
@@ -17,11 +18,9 @@ class Router(tornado.routing.Router):
         self.routes = routes
 
     def find_handler(self, request, **kwargs):
-        try:
-            handler = self.map_handlers[request.method]
-        except:
-            handler = MethodNotAllowedResource
-        return self.app.get_handler_delegate(request, handler, path_args=[request.path, self.routes])
+        handler = self.map_handlers[request.method]
+        controller = torn.plugins.app.routing(self.routes, method=request.method, path=request.path)
+        return self.app.get_handler_delegate(request, handler, path_args=[request.path], target_kwargs=dict(controller=controller))
 
 class Routing:
     def __init__(self):
