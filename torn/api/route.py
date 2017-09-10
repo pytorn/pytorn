@@ -27,7 +27,14 @@ class Routing:
         self.routes = {}
 
     def _add(self, method, uri, controller):
-        self.routes[uri]
+        self.routes[uri] = {
+            'path'          : uri,
+            'controller'    : controller
+        }
+        if('method' in self.routes[uri]):
+            self.routes[uri]['method'].append(method)
+        else:
+            self.routes[uri]['method'] = [method]
 
     def get(self, uri, controller):
         self._add('GET', uri, controller)

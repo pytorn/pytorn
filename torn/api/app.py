@@ -6,10 +6,10 @@ import tornado.httpserver
 from .route import Routing
 from ..plugins import app
 
-class Application():
+class Application:
 	# the application class, to initialize the server
 	# The settings will be read from 
-	def __init__(self):
+	def __init__(self, route = Routing()):
 		self.root_dir = os.getcwd()
 		# gonna read settings from Config/config.json
 		self = app.settings(self)
