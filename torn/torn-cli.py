@@ -18,6 +18,8 @@
 import sys
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 
+__version__ = '0.0.4'
+
 def test2():
 	print ("wow")
 

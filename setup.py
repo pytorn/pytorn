@@ -51,22 +51,17 @@ except:
 
 setup(
     name='torn',
-    version=find_version('torn.py'),
+    version=find_version('torn/torn-cli.py'),
     description='A command line application to easily create and run tornado applications.',
     long_description=long_description,
     keywords='Tornado Web',
     author='Shubhodeep Mukherjee',
     author_email='shubhodeep9@gmail.com',
-    url='https://github.com/shubhodeep9/torn',
+    url='https://github.com/pytorn/torn',
     license='Apache License, Version 2.0',
     install_requires=["tornado>=4.3.0"],
-    py_modules=["torn","newapp","colors","apiapp"],
-    entry_points={
-        'console_scripts': [
-            'torn=torn:main',
-            'torn-cli=torn:main'
-        ]
-    },
+    packages=["torn"],
+    include_package_data=True,
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Programming Language :: Python',
