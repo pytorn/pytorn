@@ -11,22 +11,34 @@ class GetResource(tornado.web.RequestHandler):
 		self.finish(body)
 
 class PostResource(tornado.web.RequestHandler):
-	def post(self, path, routes):
+	def initialize(self, controller):
+		self.controller = controller
+
+	def post(self, path):
 		body = routes[path]['controller']()
 		self.finish(body)
 
 class PutResource(tornado.web.RequestHandler):
-	def put(self, path, routes):
+	def initialize(self, controller):
+		self.controller = controller
+		
+	def put(self, path):
 		body = routes[path]['controller']()
 		self.finish(body)
 
 class PatchResource(tornado.web.RequestHandler):
-	def patch(self, path, routes):
+	def initialize(self, controller):
+		self.controller = controller
+		
+	def patch(self, path):
 		body = routes[path]['controller']()
 		self.finish(body)
 
 class DeleteResource(tornado.web.RequestHandler):
-	def delete(self, path, routes):
+	def initialize(self, controller):
+		self.controller = controller
+		
+	def delete(self, path):
 		body = routes[path]['controller']()
 		self.finish(body)
 
