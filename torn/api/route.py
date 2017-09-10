@@ -4,13 +4,30 @@
 import tornado.routing.Router
 import __init__ as api
 
-class Routing(tornado.routing.Router):
-
+class Router(tornado.routing.Router):
     def __init__(self, app):
         self.app = app
+        self.map_handlers = {
+            'GET'       : GetResource,
+            'POST'      : PostResource,
+            'PUT'       : PutResource,
+            'PATCH'     : PatchResource,
+            'DELETE'    : DeleteResource
+        }
+
+    def find_handler(self, request, **kwargs):
+        try:
+            handler = self.map_handlers[request.method]
+        except:
+            handler = MethodNotAllowedResource
+        return self.app.get_handler_delegate(request, handler, path_args=[request.path])
+
+class Routing:
+    def __init__(self):
+        self.routes = {}
 
     def _add(self, method, uri, controller):
-        print (uri)
+        self.routes[uri]
 
     def get(self, uri, controller):
         self._add('GET', uri, controller)
