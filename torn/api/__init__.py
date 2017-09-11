@@ -8,7 +8,6 @@ class GetResource(tornado.web.RequestHandler):
 
 	def get(self, path):
 		body = self.controller.index()
-		print (path)
 		self.finish(body)
 
 class PostResource(tornado.web.RequestHandler):

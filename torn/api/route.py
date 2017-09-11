@@ -40,5 +40,4 @@ class Router(tornado.routing.Router):
     def find_handler(self, request, **kwargs):
         handler = self.map_handlers[request.method]
         controller = torn.plugins.app.routing(self.routes, method=request.method, path=request.path)
-        print (request.arguments)
         return self.app.get_handler_delegate(request, handler, path_args=[request.path], target_kwargs=dict(controller=controller))
