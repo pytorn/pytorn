@@ -5,23 +5,6 @@ import tornado.routing
 from torn.api import *
 import torn.plugins.app
 
-class Router(tornado.routing.Router):
-    def __init__(self, app, routes):
-        self.app = app
-        self.map_handlers = {
-            'GET'       : GetResource,
-            'POST'      : PostResource,
-            'PUT'       : PutResource,
-            'PATCH'     : PatchResource,
-            'DELETE'    : DeleteResource
-        }
-        self.routes = routes
-
-    def find_handler(self, request, **kwargs):
-        handler = self.map_handlers[request.method]
-        controller = torn.plugins.app.routing(self.routes, method=request.method, path=request.path)
-        return self.app.get_handler_delegate(request, handler, path_args=[request.path], target_kwargs=dict(controller=controller))
-
 class Routing:
     def __init__(self):
         self.routes = {}
@@ -41,3 +24,21 @@ class Routing:
 
     def post(self, uri, controller):
         self._add('POST', uri, controller)
+
+class Router(tornado.routing.Router):
+    def __init__(self, app, route = Routing()):
+        self.app = app
+        self.map_handlers = {
+            'GET'       : GetResource,
+            'POST'      : PostResource,
+            'PUT'       : PutResource,
+            'PATCH'     : PatchResource,
+            'DELETE'    : DeleteResource
+        }
+        self.routes = route.routes
+
+    def find_handler(self, request, **kwargs):
+        handler = self.map_handlers[request.method]
+        controller = torn.plugins.app.routing(self.routes, method=request.method, path=request.path)
+        print (request.arguments)
+        return self.app.get_handler_delegate(request, handler, path_args=[request.path], target_kwargs=dict(controller=controller))
