@@ -16,19 +16,15 @@
 #    under the License.
 
 import sys
-from argparse import ArgumentParser, RawDescriptionHelpFormatter
+import __init__ as torn
 
 __version__ = '0.0.4'
 
-def test2():
-	print ("wow")
-
-
 def main():
 	try:
-		torn()
+		torn.cli()
 	except KeyboardInterrupt:
 		print ('\nTerminating process')
 
 if __name__ == '__main__':
-	test()
+	main()
