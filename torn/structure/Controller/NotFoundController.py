@@ -2,5 +2,5 @@
 # -*- coding: utf-8 -*-
 
 class NotFoundController:
-	def index():
-		return "<h1>404</h1>"
+    def index():
+        return "<h1>404</h1>"

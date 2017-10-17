@@ -5,8 +5,8 @@ from torn.api.app import Application
 import Routes.web
 
 def run():
-	app = Application()
-	app.run(routes = Routes.web.route)
+    app = Application()
+    app.run(routes = Routes.web.route)
 
 if __name__ == '__main__':
-	run()
+    run()

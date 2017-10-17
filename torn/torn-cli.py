@@ -21,10 +21,10 @@ import __init__ as torn
 __version__ = '0.0.4'
 
 def main():
-	try:
-		torn.cli()
-	except KeyboardInterrupt:
-		print ('\nTerminating process')
+    try:
+        torn.cli()
+    except KeyboardInterrupt:
+        print ('\nTerminating process')
 
 if __name__ == '__main__':
-	main()
+    main()
