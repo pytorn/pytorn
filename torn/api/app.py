@@ -40,7 +40,7 @@ class Middleware:
 
     # Write the logic to handle the Request
     # Output Response
-    def handle(self, request):
+    def handle(self, request, next):
         # When you extend, remember to call in_exceptions and \
         # other functions if exists
         pass
