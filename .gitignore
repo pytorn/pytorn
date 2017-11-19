@@ -58,3 +58,5 @@ target/
 
 test.py
 torn/structure/torn/
+
+.vscode
