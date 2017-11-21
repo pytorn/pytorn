@@ -1,3 +1,4 @@
+"""Module provides colors to diplay in command line."""
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Copyright 2016 Shubhodeep Mukherjee
@@ -17,6 +18,7 @@
 
 #(http://stackoverflow.com/a/287944) referred from
 class BColors:
+    """Class provides colors to display in command line."""
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
     OKGREEN = '\033[92m'
@@ -25,3 +27,4 @@ class BColors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
+    
