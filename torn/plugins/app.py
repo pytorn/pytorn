@@ -4,12 +4,13 @@
 import json
 import tornado.web
 
-def settings(object):
-    with open(object.root_dir + '/Config/config.json') as config:
+def settings(instance):
+    with open(instance.root_dir + '/Config/config.json') as config:
         config = json.load(config)
-        object.name = config['name']
-        object.port = config['port']
-        object.mode = config['devmode']
+        instance.name = config['name']
+        instance.port = config['port']
+        instance.mode = config['devmode']
+    return instance
 
 def routing(routes, method = 'GET', path = ''):
     if path in routes:
