@@ -1,3 +1,5 @@
+"""Torn module comprises of command line, and library to use the torn
+MVC framework, which is based on tornado."""
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Copyright 2016 Shubhodeep Mukherjee
@@ -15,16 +17,18 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import sys
-import __init__ as torn
+from __future__ import print_function
+import torn
 
-__version__ = '0.0.4'
+__version__ = "0.0.4"
 
 def main():
+    """The executable for torn command line, that checks
+    through everything."""
     try:
         torn.cli()
     except KeyboardInterrupt:
-        print ('\nTerminating process')
+        print('\nTerminating process')
 
 if __name__ == '__main__':
     main()
