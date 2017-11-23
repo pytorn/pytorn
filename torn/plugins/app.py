@@ -1,8 +1,9 @@
-"""Plugin app helper module."""
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""Plugin app helper module."""
 
 import json
+import torn.exception
 
 def settings(instance):
     """Definition to set settings from config file to the app instance."""
@@ -21,5 +22,5 @@ def routing(routes, method='GET', path=''):
         else:
             return 500
     else:
-        return routes['/404']['controller']
+        raise torn.exception.TornNotFoundError
     

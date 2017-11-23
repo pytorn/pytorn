@@ -50,7 +50,4 @@ def error(message):
     print((now + ' [' + torn.plugins.colors.FAIL)
           ('ERROR' + torn.plugins.colors.ENDC + '] ')
           (message))
-
-if __name__ == '__main__':
-    error("You need to do something")
     
