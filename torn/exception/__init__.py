@@ -12,7 +12,7 @@ class TornException(Exception):
     def __init__(self, status_code=None):
         response_code = ""
         if status_code and isinstance(status_code, int):
-            response_code = "Response " + status_code + ": " 
+            response_code = "Response " + status_code + ": "
         Exception.__init__(self, response_code + "Something seems torn!!!") #Damn !!!!
 
 
@@ -21,8 +21,18 @@ class TornNotFoundError(Exception):
     not found exception.
 
     raise TornNotFoundError returns
-    > TornNotFoundError: Resource not found.
+    > TornNotFoundError: Response 404: Resource not found.
     """
     def __init__(self):
-        Exception.__init__(self, "Resource not found.")
+        Exception.__init__(self, "Response 404: Resource not found.")
+
+
+class TornInternalError(Exception):
+    """Torn exception class for Internal Server Error.
+
+    raise TornInternalError returns
+    > TornInternalError: Response 500: Internal Server Error.
+    """
+    def __init__(self):
+        Exception.__init__(self, "Response 500: Internal Server Error.")
     

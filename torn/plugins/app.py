@@ -20,7 +20,7 @@ def routing(routes, method='GET', path=''):
         if method in routes[path]['method']:
             return routes[path]['controller']
         else:
-            return 500
+            return torn.exception.TornInternalError
     else:
         raise torn.exception.TornNotFoundError
     
