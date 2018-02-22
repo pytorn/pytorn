@@ -9,7 +9,7 @@ from ..plugins import app
 
 class Application:
     # the application class, to initialize the server
-    # The settings will be read from 
+    # The settings will be read from
     def __init__(self):
         self.root_dir = os.getcwd()
         # gonna read settings from Config/config.json
