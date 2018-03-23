@@ -17,8 +17,8 @@ Versions
 torn-cli works with Python 2.4-3.5
 
 
-Installation
-------------
+Installation [DEPRECATED]
+-------------------------
 
 ::
 
@@ -31,8 +31,8 @@ or
 	pip install git+https://github.com/shubhodeep9/torn.git
 
 
-Usage
------
+Usage [DEPRECATED]
+------------------
 
 ::
 
