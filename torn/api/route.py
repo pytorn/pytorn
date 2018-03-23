@@ -25,6 +25,15 @@ class Routing:
     def post(self, uri, controller):
         self._add('POST', uri, controller)
 
+    def put(self, uri, controller):
+        self._add('PUT', uri, controller)
+
+    def patch(self, uri, controller):
+        self._add('PATCH', uri, controller)
+
+    def delete(self, uri, controller):
+        self._add('DELETE', uri, controller)
+
 class Router(tornado.routing.Router):
     def __init__(self, app, route = Routing()):
         self.app = app
