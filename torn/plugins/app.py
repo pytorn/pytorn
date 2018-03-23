@@ -3,7 +3,7 @@
 """Plugin app helper module."""
 
 import json
-import torn.exception
+from torn.exception import TornInternalError, TornNotFoundError
 
 def settings(instance):
     """Definition to set settings from config file to the app instance."""
@@ -20,7 +20,7 @@ def routing(routes, method='GET', path=''):
         if method in routes[path]['method']:
             return routes[path]['controller']
         else:
-            return torn.exception.TornInternalError
+            return TornInternalError
     else:
-        raise torn.exception.TornNotFoundError
-    
+        raise TornNotFoundError
+
