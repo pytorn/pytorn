@@ -14,13 +14,16 @@ def settings(instance):
         instance.mode = config['devmode']
     return instance
 
-def routing(routes, method='GET', path=''):
+def routing(routes, request):
     """Definition for route matching : helper"""
+
+    path = request.path
+    method = request.method
     if path in routes:
         if method in routes[path]['method']:
             return routes[path]['controller']
         else:
-            return TornMethodNotAllowed
+            raise TornMethodNotAllowed
     else:
         raise TornNotFoundError
 

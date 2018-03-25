@@ -2,46 +2,45 @@
 # -*- coding: utf-8 -*-
 """Custom Exception module for Torn"""
 
-class TornException(Exception):
+import tornado.httpclient
+
+class TornException(tornado.httpclient.HTTPError):
     """Torn parent exception class.
     It can be thrown for uncertain errors.
 
     raise TornException returns
     > TornException: Something seems torn!!!
     """
-    def __init__(self, status_code=None):
-        response_code = ""
-        if status_code and isinstance(status_code, int):
-            response_code = "Response " + status_code + ": "
-        Exception.__init__(self, response_code + "Something seems torn!!!") #Damn !!!!
+    def __init__(self, status_code, response=None):
+        super(TornException, self).__init__(code=status_code, response=response, message="Something seems torn!") #damn
 
 
-class TornNotFoundError(Exception):
+class TornNotFoundError(tornado.httpclient.HTTPError):
     """Torn exception class for resource \
     not found exception.
 
     raise TornNotFoundError returns
     > TornNotFoundError: Response 404: Resource not found.
     """
-    def __init__(self):
-        Exception.__init__(self, "Response 404: Resource not found.")
+    def __init__(self, response):
+        super(TornNotFoundError, self).__init__(code=404, response=response, message="Response 404: Resource not found.")
 
 
-class TornInternalError(Exception):
+class TornInternalError(tornado.httpclient.HTTPError):
     """Torn exception class for Internal Server Error.
 
     raise TornInternalError returns
     > TornInternalError: Response 500: Internal Server Error.
     """
     def __init__(self):
-        Exception.__init__(self, "Response 500: Internal Server Error.")
+        super(TornInternalError, self).__init__(code=500, response=response, message="Response 500: Internal Server Error.")
 
 
-class TornMethodNotAllowed(Exception):
+class TornMethodNotAllowed(tornado.httpclient.HTTPError):
     """Torn exception class for Invalid Request method.
 
     raise TornMethodNotAllowed returns
     > TornMethodNotAllowed: Response 405: Method Not Allowed.
     """
     def __init__(self):
-        Exception.__init__(self, "Response 405: Method Not Allowed.")
+        super(TornMethodNotAllowed, self).__init__(code=405, response=response, message="Response 405: Method Not Allowed.")
