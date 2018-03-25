@@ -5,7 +5,7 @@ import tornado.web
 import tornado.ioloop
 import tornado.httpserver
 from torn.api.route import Routing, Router
-from ..plugins import app
+from torn.plugins import app
 
 class Application:
     # the application class, to initialize the server

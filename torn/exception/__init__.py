@@ -35,4 +35,13 @@ class TornInternalError(Exception):
     """
     def __init__(self):
         Exception.__init__(self, "Response 500: Internal Server Error.")
-    
+
+
+class TornMethodNotAllowed(Exception):
+    """Torn exception class for Invalid Request method.
+
+    raise TornMethodNotAllowed returns
+    > TornMethodNotAllowed: Response 405: Method Not Allowed.
+    """
+    def __init__(self):
+        Exception.__init__(self, "Response 405: Method Not Allowed.")
