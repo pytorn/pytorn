@@ -6,6 +6,7 @@ import tornado.ioloop
 import tornado.httpserver
 from torn.api.route import Routing, Router
 from torn.plugins import app
+from jinja2 import Template
 
 class Application:
     # the application class, to initialize the server
@@ -55,4 +56,30 @@ class Middleware:
 
         # Else return False
         return False
+
+# class Controller will be an abstract class with implemented methods for implemented Controller
+class Controller:
+
+    def __init__(self):
+        pass
+
+    # index method will be implemented on get method
+    def index(self):
+        raise NotImplementedError
+
+    # post method will be implemented on post method
+    def post(self):
+        raise NotImplementedError
+    
+    # put method will be implemented on put method
+    def put(self):
+        raise NotImplementedError
+
+    # patch method will be implemented on patch method
+    def patch(self):
+        raise NotImplementedError
+
+    # delete method will be implemented on delete method
+    def delete(self):
+        raise NotImplementedError
 
