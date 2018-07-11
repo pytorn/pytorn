@@ -83,3 +83,9 @@ class Controller:
     def delete(self):
         raise NotImplementedError
 
+    def render(self, template, **data):
+        if(type(template) != str):
+            raise TypeError("String expected")
+        
+        template = Template(template)
+        return template.render(data)
