@@ -15,7 +15,7 @@ class PostResource(tornado.web.RequestHandler):
         self.controller = controller
 
     def post(self, path):
-        body = self.controller.index()
+        body = self.controller.post()
         self.finish(body)
 
 class PutResource(tornado.web.RequestHandler):
@@ -23,7 +23,7 @@ class PutResource(tornado.web.RequestHandler):
         self.controller = controller
         
     def put(self, path):
-        body = self.controller.index()
+        body = self.controller.put()
         self.finish(body)
 
 class PatchResource(tornado.web.RequestHandler):
@@ -31,7 +31,7 @@ class PatchResource(tornado.web.RequestHandler):
         self.controller = controller
         
     def patch(self, path):
-        body = self.controller.index()
+        body = self.controller.patch()
         self.finish(body)
 
 class DeleteResource(tornado.web.RequestHandler):
@@ -39,6 +39,6 @@ class DeleteResource(tornado.web.RequestHandler):
         self.controller = controller
         
     def delete(self, path):
-        body = self.controller.index()
+        body = self.controller.delete()
         self.finish(body)
 
