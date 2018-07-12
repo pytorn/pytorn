@@ -6,7 +6,7 @@ import tornado.ioloop
 import tornado.httpserver
 from torn.api.route import Routing, Router
 from torn.plugins import app
-from jinja2 import Template
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 class Application:
     # the application class, to initialize the server
@@ -87,5 +87,10 @@ class Controller:
         if(type(template) != str):
             raise TypeError("String expected")
         
-        template = Template(template)
+        env = Environment(
+            loader=FileSystemLoader('Views'),
+            autoescape=select_autoescape()
+        )
+
+        template = env.get_template(template)
         return template.render(data)
