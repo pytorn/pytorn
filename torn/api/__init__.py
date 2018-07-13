@@ -7,7 +7,7 @@ class GetResource(tornado.web.RequestHandler):
         self.controller = controller
 
     def get(self, path):
-        body = self.controller.index()
+        body = self.controller.get()
         self.finish(body)
 
 class PostResource(tornado.web.RequestHandler):

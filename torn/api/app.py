@@ -66,7 +66,7 @@ class Controller:
         pass
 
     # index method will be implemented on get method
-    def index(self):
+    def get(self):
         raise NotImplementedError
 
     # post method will be implemented on post method
