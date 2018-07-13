@@ -59,7 +59,7 @@ setup(
     author_email='shubhodeep9@gmail.com',
     url='https://github.com/pytorn/torn',
     license='Apache License, Version 2.0',
-    install_requires=["tornado>=4.3.0"],
+    install_requires=["tornado>=4.3.0", "Jinja2"],
     packages=["torn"],
     include_package_data=True,
     classifiers=[

@@ -6,6 +6,8 @@ import tornado.ioloop
 import tornado.httpserver
 from torn.api.route import Routing, Router
 from torn.plugins import app
+import pkgutil
+import inspect
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 class Application:
@@ -94,3 +96,17 @@ class Controller:
 
         template = env.get_template(template)
         return template.render(data)
+
+def load_controllers(path):
+    output = []
+    for loader, name, is_pkg in pkgutil.walk_packages(path):
+        module = loader.find_module(name).load_module(name)
+
+        for name, value in inspect.getmembers(module):
+            if name.startswith('__'):
+                continue
+
+            globals()[name] = value
+            output.append(name)
+
+    return output
