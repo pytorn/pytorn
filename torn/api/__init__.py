@@ -9,7 +9,7 @@ class GetResource(tornado.web.RequestHandler):
 
     def get(self, **kwargs):
         if(inspect.isclass(self.controller)):
-            controller = self.controller()
+            controller = self.controller(self.reverse_url) # pass RequestHandlers Reverse Url
             body = controller.get(**kwargs)
         elif(inspect.isfunction(self.controller)):
             body = controller(**kwargs)
