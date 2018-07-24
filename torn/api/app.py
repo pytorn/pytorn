@@ -4,7 +4,7 @@ import os
 import tornado.web
 import tornado.ioloop
 import tornado.httpserver
-from torn.api.route import Routing, Router
+from torn.api.route
 from torn.plugins import app
 import pkgutil
 import inspect
@@ -22,7 +22,7 @@ class Application:
     # method to execute the application
     def run(self, routes):
         application = tornado.web.Application()
-        router = Router(application, routes)
+        router = torn.api.route.Router(application, routes)
         http_server = tornado.httpserver.HTTPServer(router)
         http_server.listen(self.port)
         tornado.ioloop.IOLoop.current().start()
