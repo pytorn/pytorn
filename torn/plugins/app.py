@@ -48,9 +48,7 @@ def uri_creater(uri, regex, defaults):
         
         # set default
         if variable in defaults:
-            if variable == False:
-                defaults[variable] = ""
-            set_regex = "(" + set_regex + "|" + defaults[variable] + ")"
+            set_regex = "(" + set_regex + "|)"
         
         uri = uri.replace(variable, set_regex)
         
