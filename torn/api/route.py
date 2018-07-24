@@ -13,11 +13,12 @@ class Routing:
 
     def _add(self, method, uri, name, controller, defaults={}, regex={}):
         # replace variables with regex if exists or with default regex
-        uri = torn.plugins.app.uri_creator(uri, regex, defaults)
+        created_uri = torn.plugins.app.uri_creator(uri, regex, defaults)
         self.routes[name] = {
-            'path'          : uri['uri'],
-            'variables'     : uri['variables'],
+            'path'          : created_uri['uri'],
+            'variables'     : created_uri['variables'],
             'defaults'      : defaults,
+            'uri'           : uri,
             'controller'    : controller
         }
         if 'method' in self.routes[name]:
@@ -55,11 +56,23 @@ class Router(tornado.routing.Router):
         }
         self.routes = route.getRouteCollection()
 
+    def url_for(self, name, kwargs=dict()):
+        if name not in self.routes:
+            return ""
+        try:
+            route = self.routes[name]
+            uri = route['uri']
+            for variable in route['variables']:
+                uri = uri.replace("{" + variable + "}", kwargs[variable])
+            return uri
+        except:
+            return ""
+
     def find_handler(self, request, **kwargs):
         try:
             handler = self.map_handlers[request.method]
             route_data = torn.plugins.app.routing(self.routes, request=request)
-            return self.app.get_handler_delegate(request, handler, path_kwargs=route_data['kwargs'], target_kwargs=dict(controller=route_data['controller']))
+            return self.app.get_handler_delegate(request, handler, path_kwargs=route_data['kwargs'], target_kwargs=dict(controller=route_data['controller'], url_for=self.url_for))
         except tornado.web.HTTPError as e:
             print e.status_code
             return self.app.get_handler_delegate(request, TornErrorHandler, target_kwargs=dict(status_code=e.status_code))

@@ -68,9 +68,6 @@ def uri_creator(uri, regex, defaults):
     matches = re.findall('{[a-zA-Z0-9\_]+}', uri)
     default_regex = '[a-zA-Z0-9]+'
     
-    # list of tuples
-    # 0 => variable name
-    # 1 => regex to find
     variables = []
 
     # iter through matches and replace it with user given regex \

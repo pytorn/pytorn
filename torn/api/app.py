@@ -62,10 +62,10 @@ class Middleware:
 # class Controller will be an abstract class with implemented methods for implemented Controller
 class Controller:
 
-    def __init__(self, reverse_url = None):
+    def __init__(self, url_for = None):
         # using reverse url for Get Handler
-        if reverse_url:
-            self.reverse_url = reverse_url
+        if url_for:
+            self.url_for = url_for
 
     # index method will be implemented on get method
     def get(self):
@@ -96,7 +96,7 @@ class Controller:
             autoescape=select_autoescape()
         )
         # define url_for function for jinja
-        env.globals['url_for'] = self.reverse_url
+        env.globals['url_for'] = self.url_for
 
         template = env.get_template(template)
         return template.render(data)
