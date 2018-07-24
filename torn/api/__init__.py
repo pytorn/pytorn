@@ -7,12 +7,12 @@ class GetResource(tornado.web.RequestHandler):
     def initialize(self, controller):
         self.controller = controller
 
-    def get(self, path):
+    def get(self, **kwargs):
         if(inspect.isclass(self.controller)):
             controller = self.controller()
-            body = controller.get()
+            body = controller.get(**kwargs)
         elif(inspect.isfunction(self.controller)):
-            body = controller()
+            body = controller(**kwargs)
         else:
             raise TypeError
 
@@ -22,12 +22,12 @@ class PostResource(tornado.web.RequestHandler):
     def initialize(self, controller):
         self.controller = controller
 
-    def post(self, path):
+    def post(self, **kwargs):
         if(inspect.isclass(self.controller)):
             controller = self.controller()
-            body = controller.post()
+            body = controller.post(**kwargs)
         elif(inspect.isfunction(self.controller)):
-            body = controller()
+            body = controller(**kwargs)
         else:
             raise TypeError
 
@@ -37,12 +37,12 @@ class PutResource(tornado.web.RequestHandler):
     def initialize(self, controller):
         self.controller = controller
         
-    def put(self, path):
+    def put(self, **kwargs):
         if(inspect.isclass(self.controller)):
             controller = self.controller()
-            body = controller.put()
+            body = controller.put(**kwargs)
         elif(inspect.isfunction(self.controller)):
-            body = controller()
+            body = controller(**kwargs)
         else:
             raise TypeError
 
@@ -52,12 +52,12 @@ class PatchResource(tornado.web.RequestHandler):
     def initialize(self, controller):
         self.controller = controller
         
-    def patch(self, path):
+    def patch(self, **kwargs):
         if(inspect.isclass(self.controller)):
             controller = self.controller()
-            body = controller.patch()
+            body = controller.patch(**kwargs)
         elif(inspect.isfunction(self.controller)):
-            body = controller()
+            body = controller(**kwargs)
         else:
             raise TypeError
 
@@ -67,12 +67,12 @@ class DeleteResource(tornado.web.RequestHandler):
     def initialize(self, controller):
         self.controller = controller
         
-    def delete(self, path):
+    def delete(self, **kwargs):
         if(inspect.isclass(self.controller)):
             controller = self.controller()
-            body = controller.delete()
+            body = controller.delete(**kwargs)
         elif(inspect.isfunction(self.controller)):
-            body = controller()
+            body = controller(**kwargs)
         else:
             raise TypeError
 
