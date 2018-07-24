@@ -3,6 +3,7 @@
 """Plugin app helper module."""
 
 import json
+import re
 from torn.exception import TornInternalError, TornNotFoundError
 
 def settings(instance):
@@ -26,4 +27,35 @@ def routing(routes, request):
             raise TornMethodNotAllowed
     else:
         raise TornNotFoundError
+
+def uri_creater(uri, regex, defaults):
+    """Creates url and replaces regex and gives variables"""
+
+    # take out variables in uri
+    matches = re.findall('{[a-zA-Z0-9\_]+}', uri)
+    default_regex = '[a-zA-Z0-9]+'
+    # iter through matches and replace it with user given regex \
+    # if not present, then replace it with default regex
+    variables = []
+    for match in matches:
+        variable = re.sub("{|}", "", l)
+        variables.append(variable)
+
+        # replace the variable with regex
+        set_regex = default_regex
+        if variable in regex:
+            set_regex = regex[variable]
+        
+        # set default
+        if variable in defaults:
+            if variable == False:
+                defaults[variable] = ""
+            set_regex = "(" + set_regex + "|" + defaults[variable] + ")"
+        
+        uri = uri.replace(variable, set_regex)
+        
+    return {
+        'variables' : variables,
+        'uri'       : uri
+    }
 

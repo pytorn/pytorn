@@ -9,8 +9,10 @@ class Routing:
     def __init__(self):
         self.routes = {}
 
-    def _add(self, method, uri, controller):
-        self.routes[uri] = {
+    def _add(self, method, uri, name, controller, defaults=[], regex=[]):
+        # replace variables with regex if exists or with default regex
+        uri = torn.plugins.app.uri_creator(uri, regex, defaults)
+        self.routes[name] = {
             'path'          : uri,
             'controller'    : controller
         }
@@ -19,20 +21,20 @@ class Routing:
         else:
             self.routes[uri]['method'] = [method]
 
-    def get(self, uri, controller):
-        self._add('GET', uri, controller)
+    def get(self, uri, name, controller, defaults=[], regex=[]):
+        self._add('GET', uri, name, controller, defaults=[], regex=[])
 
-    def post(self, uri, controller):
-        self._add('POST', uri, controller)
+    def post(self, uri, name, controller, defaults=[], regex=[]):
+        self._add('POST', uri, name, controller, defaults=[], regex=[])
 
-    def put(self, uri, controller):
-        self._add('PUT', uri, controller)
+    def put(self, uri, name, controller, defaults=[], regex=[]):
+        self._add('PUT', uri, name, controller, defaults=[], regex=[])
 
-    def patch(self, uri, controller):
-        self._add('PATCH', uri, controller)
+    def patch(self, uri, name, controller, defaults=[], regex=[]):
+        self._add('PATCH', uri, name, controller, defaults=[], regex=[])
 
-    def delete(self, uri, controller):
-        self._add('DELETE', uri, controller)
+    def delete(self, uri, name, controller, defaults=[], regex=[]):
+        self._add('DELETE', uri, name, controller, defaults=[], regex=[])
 
 class Router(tornado.routing.Router):
     def __init__(self, app, route = Routing()):
