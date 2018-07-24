@@ -4,6 +4,8 @@
 import tornado.routing
 from torn.api import *
 import torn.plugins.app
+from torn.exception import TornErrorHandler
+import tornado.web
 
 class Routing:
     def __init__(self):
@@ -18,7 +20,7 @@ class Routing:
             'defaults'      : defaults,
             'controller'    : controller
         }
-        if 'method' in self.routes[uri]:
+        if 'method' in self.routes[name]:
             self.routes[name]['method'].append(method)
         else:
             self.routes[name]['method'] = [method]
@@ -54,6 +56,10 @@ class Router(tornado.routing.Router):
         self.routes = route.getRouteCollection()
 
     def find_handler(self, request, **kwargs):
-        handler = self.map_handlers[request.method]
-        route_data = torn.plugins.app.routing(self.routes, request=request)
-        return self.app.get_handler_delegate(request, handler, path_kwargs=route_data['kwards'], target_kwargs=dict(controller=controller, args=))
+        try:
+            handler = self.map_handlers[request.method]
+            route_data = torn.plugins.app.routing(self.routes, request=request)
+            return self.app.get_handler_delegate(request, handler, path_kwargs=route_data['kwargs'], target_kwargs=dict(controller=route_data['controller']))
+        except tornado.web.HTTPError as e:
+            print e.status_code
+            return self.app.get_handler_delegate(request, TornErrorHandler, target_kwargs=dict(status_code=e.status_code))

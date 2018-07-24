@@ -51,7 +51,7 @@ except:
 
 setup(
     name='torn',
-    version=find_version('torn/torn-cli.py'),
+    version=find_version('torn/torn_cli.py'),
     description='A command line application to easily create and run tornado applications.',
     long_description=long_description,
     keywords='Tornado Web',

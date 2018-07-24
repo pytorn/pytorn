@@ -4,7 +4,7 @@ import os
 import tornado.web
 import tornado.ioloop
 import tornado.httpserver
-from torn.api.route
+import torn.api.route
 from torn.plugins import app
 import pkgutil
 import inspect
@@ -92,10 +92,9 @@ class Controller:
             raise TypeError("String expected")
         
         env = Environment(
-            loader=FileSystemLoader('Views'),
+            loader=FileSystemLoader(os.getcwd() + '/View'),
             autoescape=select_autoescape()
         )
-        
         # define url_for function for jinja
         env.globals['url_for'] = self.reverse_url
 
