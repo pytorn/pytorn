@@ -7,7 +7,7 @@ from __future__ import print_function
 from datetime import datetime
 import torn.plugins.colors
 
-def warning(message):
+def warning(message, code='WARNING'):
     """Display Warning.
 
     Method prints the warning message, message being given
@@ -19,11 +19,11 @@ def warning(message):
 
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     output = now + ' [' + torn.plugins.colors.WARNING + \
-            'WARNING' + torn.plugins.colors.ENDC + '] \t' + \
+            code + torn.plugins.colors.ENDC + '] \t' + \
             message
     print(output)
 
-def info(message):
+def info(message, code='INFO'):
     """Display Information.
 
     Method prints the information message, message being given
@@ -35,11 +35,11 @@ def info(message):
 
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     output = now + ' [' + torn.plugins.colors.OKBLUE + \
-            'INFO' + torn.plugins.colors.ENDC + '] \t' + \
+            code + torn.plugins.colors.ENDC + '] \t' + \
             message
     print(output)
 
-def error(message):
+def error(message, code='ERROR'):
     """Display Error.
 
     Method prints the error message, message being given
@@ -50,7 +50,7 @@ def error(message):
     """
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     output = now + ' [' + torn.plugins.colors.FAIL + \
-            'ERROR' + torn.plugins.colors.ENDC + '] \t' + \
+            code + torn.plugins.colors.ENDC + '] \t' + \
             message
     print(output)
     
