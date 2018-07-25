@@ -6,6 +6,7 @@ from torn.api import *
 import torn.plugins.app
 from torn.exception import TornErrorHandler
 import tornado.web
+import torn.plugins.log
 
 class Routing:
     def __init__(self):
@@ -69,10 +70,13 @@ class Router(tornado.routing.Router):
             return ""
 
     def find_handler(self, request, **kwargs):
+        # logging to be done here
         try:
             handler = self.map_handlers[request.method]
             route_data = torn.plugins.app.routing(self.routes, request=request)
+            torn.plugins.log.info(request.method + " " + request.path + " STATUS: 200")
             return self.app.get_handler_delegate(request, handler, path_kwargs=route_data['kwargs'], target_kwargs=dict(controller=route_data['controller'], url_for=self.url_for))
         except tornado.web.HTTPError as e:
-            print e.status_code
+            torn.plugins.log.warning(request.method + " " + request.path + " STATUS: " + str(e.status_code))
             return self.app.get_handler_delegate(request, TornErrorHandler, target_kwargs=dict(status_code=e.status_code))
+            

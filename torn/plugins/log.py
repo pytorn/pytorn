@@ -18,9 +18,10 @@ def warning(message):
     """
 
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print((now + ' [' + torn.plugins.colors.WARNING)
-          ('WARNING' + torn.plugins.colors.ENDC + '] ')
-          (message))
+    output = now + ' [' + torn.plugins.colors.WARNING + \
+            'WARNING' + torn.plugins.colors.ENDC + '] \t' + \
+            message
+    print(output)
 
 def info(message):
     """Display Information.
@@ -33,9 +34,10 @@ def info(message):
     """
 
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print((now + ' [' + torn.plugins.colors.OKBLUE)
-          ('INFO' + torn.plugins.colors.ENDC + '] ')
-          (message))
+    output = now + ' [' + torn.plugins.colors.OKBLUE + \
+            'INFO' + torn.plugins.colors.ENDC + '] \t' + \
+            message
+    print(output)
 
 def error(message):
     """Display Error.
@@ -47,7 +49,8 @@ def error(message):
         message {string} -- The message to be displayed.
     """
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print((now + ' [' + torn.plugins.colors.FAIL)
-          ('ERROR' + torn.plugins.colors.ENDC + '] ')
-          (message))
+    output = now + ' [' + torn.plugins.colors.FAIL + \
+            'ERROR' + torn.plugins.colors.ENDC + '] \t' + \
+            message
+    print(output)
     

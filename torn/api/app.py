@@ -8,6 +8,7 @@ import torn.api.route
 from torn.plugins import app
 import pkgutil
 import inspect
+import logging
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 class Application:
@@ -17,6 +18,7 @@ class Application:
         self.root_dir = os.getcwd()
         # gonna read settings from Config/config.json
         self = app.settings(self)
+        logging.getLogger('tornado.access').disabled = True
 
 
     # method to execute the application
