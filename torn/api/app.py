@@ -9,6 +9,7 @@ from torn.plugins import app
 import pkgutil
 import inspect
 import logging
+import torn.plugins.log
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 class Application:
@@ -27,6 +28,7 @@ class Application:
         router = torn.api.route.Router(application, routes)
         http_server = tornado.httpserver.HTTPServer(router)
         http_server.listen(self.port)
+        torn.plugins.log.info("Server initiated. Visit " + self.host + ":" + str(self.port))
         tornado.ioloop.IOLoop.current().start()
 
 

@@ -13,6 +13,10 @@ def settings(instance):
         config = json.load(config)
         instance.name = config['name']
         instance.port = config['port']
+        # default host
+        instance.host = "http://localhost"
+        if 'host' in config:
+            instance.host = config['host']
         instance.mode = config['devmode']
     return instance
 
