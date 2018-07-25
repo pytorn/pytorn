@@ -99,3 +99,6 @@ def uri_creator(uri, regex, defaults):
         'uri'       : uri
     }
 
+def is_static(file):
+    static_extentions = re.findall('.+(\.css|\.js|\.ttf|\.png|\.jpg|\.gif|\.ico|robots\.txt)$', file)
+    return len(static_extentions)
