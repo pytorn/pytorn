@@ -23,13 +23,20 @@ class Application:
 
 
     # method to execute the application
-    def run(self, routes):
-        application = tornado.web.Application()
-        router = torn.api.route.Router(application, routes)
-        http_server = tornado.httpserver.HTTPServer(router)
-        http_server.listen(self.port)
-        torn.plugins.log.info("Server initiated. Visit " + self.host + ":" + str(self.port))
-        tornado.ioloop.IOLoop.current().start()
+    def run(self, routes, autoreload = False):
+        try:
+            application = tornado.web.Application(autoreload=autoreload)
+            router = torn.api.route.Router(application, routes)
+            http_server = tornado.httpserver.HTTPServer(router)
+            http_server.listen(self.port)
+            torn.plugins.log.info("Server initiated. Visit " + self.host + ":" + str(self.port))
+            tornado.ioloop.IOLoop.current().start()
+        except KeyboardInterrupt:
+            user_input = raw_input('\nAre you sure? [y/n]\t')
+            if user_input in ['y', 'Y']:
+                quit()
+            else:
+                pass
 
 
 # class Middleware that can be extended to put features
