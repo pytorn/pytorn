@@ -25,9 +25,9 @@ def routing(routes, request):
     # iterate through routes to match
     args = {}
     for name, route in routes.iteritems():
-        if route['path'] == '':
+        if route['path'] == '^':
             # this section exists because regex doesn't work for null character as desired
-            if route['path'] == path:
+            if path == '':
                 match = [True]
             else:
                 match = []
@@ -88,6 +88,8 @@ def uri_creator(uri, regex, defaults):
         
         uri = uri.replace(match, "(" + set_regex + ")")
         
+    # debug, put a ^ starts with for exact matching
+    uri = '^' + uri
     return {
         'variables' : variables,
         'uri'       : uri
