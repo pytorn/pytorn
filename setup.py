@@ -60,6 +60,12 @@ setup(
     url='https://github.com/pytorn/torn',
     license='Apache License, Version 2.0',
     install_requires=["tornado>=4.3.0", "Jinja2"],
+    entry_points={
+        'console_scripts': [
+            'torn=torn:main',
+            'torn-cli=torn:main'
+        ]
+    },
     packages=["torn"],
     include_package_data=True,
     classifiers=[

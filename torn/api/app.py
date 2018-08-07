@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 import os
 import tornado.web
 import tornado.ioloop
@@ -32,11 +33,10 @@ class Application:
             torn.plugins.log.info("Server initiated. Visit " + self.host + ":" + str(self.port))
             tornado.ioloop.IOLoop.current().start()
         except KeyboardInterrupt:
-            user_input = raw_input('\nAre you sure? [y/n]\t')
-            if user_input in ['y', 'Y']:
-                quit()
-            else:
-                pass
+            print()
+            torn.plugins.log.info("Stopping all services ...")
+            tornado.ioloop.IOLoop.current().stop()
+            torn.plugins.log.info("Stopped. Exiting. Cya!")
 
 
 # class Middleware that can be extended to put features
