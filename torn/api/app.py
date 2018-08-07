@@ -79,23 +79,23 @@ class Controller:
             self.url_for = url_for
 
     # index method will be implemented on get method
-    def get(self):
+    def get(self, request):
         raise NotImplementedError
 
     # post method will be implemented on post method
-    def post(self):
+    def post(self, request):
         raise NotImplementedError
     
     # put method will be implemented on put method
-    def put(self):
+    def put(self, request):
         raise NotImplementedError
 
     # patch method will be implemented on patch method
-    def patch(self):
+    def patch(self, request):
         raise NotImplementedError
 
     # delete method will be implemented on delete method
-    def delete(self):
+    def delete(self, request):
         raise NotImplementedError
 
     def render(self, template, **data):

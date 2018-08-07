@@ -11,9 +11,9 @@ class GetResource(tornado.web.RequestHandler):
     def get(self, **kwargs):
         if(inspect.isclass(self.controller)):
             controller = self.controller(self.url_for) # pass RequestHandlers Reverse Url
-            body = controller.get(**kwargs)
+            body = controller.get(self, **kwargs)
         elif(inspect.isfunction(self.controller)):
-            body = controller(**kwargs)
+            body = controller(self, **kwargs)
         else:
             raise TypeError
 
@@ -27,9 +27,9 @@ class PostResource(tornado.web.RequestHandler):
     def post(self, **kwargs):
         if(inspect.isclass(self.controller)):
             controller = self.controller()
-            body = controller.post(**kwargs)
+            body = controller.post(self, **kwargs)
         elif(inspect.isfunction(self.controller)):
-            body = controller(**kwargs)
+            body = controller(self, **kwargs)
         else:
             raise TypeError
 
@@ -43,9 +43,9 @@ class PutResource(tornado.web.RequestHandler):
     def put(self, **kwargs):
         if(inspect.isclass(self.controller)):
             controller = self.controller()
-            body = controller.put(**kwargs)
+            body = controller.put(self, **kwargs)
         elif(inspect.isfunction(self.controller)):
-            body = controller(**kwargs)
+            body = controller(self, **kwargs)
         else:
             raise TypeError
 
@@ -59,9 +59,9 @@ class PatchResource(tornado.web.RequestHandler):
     def patch(self, **kwargs):
         if(inspect.isclass(self.controller)):
             controller = self.controller()
-            body = controller.patch(**kwargs)
+            body = controller.patch(self, **kwargs)
         elif(inspect.isfunction(self.controller)):
-            body = controller(**kwargs)
+            body = controller(self, **kwargs)
         else:
             raise TypeError
 
@@ -75,9 +75,9 @@ class DeleteResource(tornado.web.RequestHandler):
     def delete(self, **kwargs):
         if(inspect.isclass(self.controller)):
             controller = self.controller()
-            body = controller.delete(**kwargs)
+            body = controller.delete(self, **kwargs)
         elif(inspect.isfunction(self.controller)):
-            body = controller(**kwargs)
+            body = controller(self, **kwargs)
         else:
             raise TypeError
 
