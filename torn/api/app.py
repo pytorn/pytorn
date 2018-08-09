@@ -11,7 +11,6 @@ import pkgutil
 import inspect
 import logging
 import torn.plugins.log
-from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 class Application:
     # the application class, to initialize the server
@@ -70,47 +69,6 @@ class Middleware:
         # Else return False
         return False
 
-# class Controller will be an abstract class with implemented methods for implemented Controller
-class Controller:
-
-    def __init__(self, url_for = None):
-        # using reverse url for Get Handler
-        if url_for:
-            self.url_for = url_for
-
-    # index method will be implemented on get method
-    def get(self, request):
-        raise NotImplementedError
-
-    # post method will be implemented on post method
-    def post(self, request):
-        raise NotImplementedError
-    
-    # put method will be implemented on put method
-    def put(self, request):
-        raise NotImplementedError
-
-    # patch method will be implemented on patch method
-    def patch(self, request):
-        raise NotImplementedError
-
-    # delete method will be implemented on delete method
-    def delete(self, request):
-        raise NotImplementedError
-
-    def render(self, template, **data):
-        if(type(template) != str):
-            raise TypeError("String expected")
-        
-        env = Environment(
-            loader=FileSystemLoader(os.getcwd() + '/View'),
-            autoescape=select_autoescape()
-        )
-        # define url_for function for jinja
-        env.globals['url_for'] = self.url_for
-
-        template = env.get_template(template)
-        return template.render(data)
 
 def load_controllers(path):
     output = []

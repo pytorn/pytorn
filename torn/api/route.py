@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import tornado.routing
-from torn.api import *
 import torn.plugins.app
 from torn.exception import TornErrorHandler
 import tornado.web
@@ -49,13 +48,6 @@ class Routing:
 class Router(tornado.routing.Router):
     def __init__(self, app, route = Routing()):
         self.app = app
-        self.map_handlers = {
-            'GET'       : GetResource,
-            'POST'      : PostResource,
-            'PUT'       : PutResource,
-            'PATCH'     : PatchResource,
-            'DELETE'    : DeleteResource
-        }
         self.routes = route.getRouteCollection()
 
     def url_for(self, name, kwargs=dict()):
@@ -77,10 +69,9 @@ class Router(tornado.routing.Router):
                 # to serve static files
                 return self.app.get_handler_delegate(request, tornado.web.StaticFileHandler, target_kwargs=dict(path=os.getcwd() + "/Assets"), path_kwargs=dict(path=request.path.strip('/')))
             else:
-                handler = self.map_handlers[request.method]
                 route_data = torn.plugins.app.routing(self.routes, request=request)
                 torn.plugins.log.info(request.method + "\t" + request.path, code=str(200))
-                return self.app.get_handler_delegate(request, handler, path_kwargs=route_data['kwargs'], target_kwargs=dict(controller=route_data['controller'], url_for=self.url_for))
+                return self.app.get_handler_delegate(request, route_data['controller'], path_kwargs=route_data['kwargs'])
         except tornado.web.HTTPError as e:
             torn.plugins.log.warning(request.method + "\t" + request.path, code=str(e.status_code))
             return self.app.get_handler_delegate(request, TornErrorHandler, target_kwargs=dict(status_code=e.status_code))
