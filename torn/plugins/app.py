@@ -86,7 +86,6 @@ def uri_creator(uri, regex, defaults):
             set_regex = regex[variable]
         
         # set default
-        print regex
         if variable in defaults:
             set_regex = set_regex + "|"
 
