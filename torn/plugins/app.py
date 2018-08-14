@@ -5,18 +5,19 @@
 import json
 import re
 import tornado.web
+import yaml
 from torn.exception import TornInternalError, TornNotFoundError, TornMethodNotAllowed
 
 def settings(instance):
     """Definition to set settings from config file to the app instance."""
-    with open(instance.root_dir + '/Config/config.json') as config:
-        config = json.load(config)
+    with open(instance.root_dir + '/Config/config.yml') as config:
+        config = yaml.load(config)
         instance.name = config['name']
-        instance.port = config['port']
+        instance.port = config['web']['port']
         # default host
         instance.host = "http://localhost"
-        if 'host' in config:
-            instance.host = config['host']
+        if 'host' in config['web']:
+            instance.host = config['web']['host']
         instance.mode = config['devmode']
     return instance
 
