@@ -28,19 +28,19 @@ class Routing:
             self.routes[name]['method'] = [method]
 
     def get(self, uri, name, controller, defaults={}, regex={}):
-        self._add('GET', uri, name, controller, defaults={}, regex={})
+        self._add('GET', uri, name, controller, defaults, regex)
 
     def post(self, uri, name, controller, defaults={}, regex={}):
-        self._add('POST', uri, name, controller, defaults={}, regex={})
+        self._add('POST', uri, name, controller, defaults, regex)
 
     def put(self, uri, name, controller, defaults={}, regex={}):
-        self._add('PUT', uri, name, controller, defaults={}, regex={})
+        self._add('PUT', uri, name, controller, defaults, regex)
 
     def patch(self, uri, name, controller, defaults={}, regex={}):
-        self._add('PATCH', uri, name, controller, defaults={}, regex={})
+        self._add('PATCH', uri, name, controller, defaults, regex)
 
     def delete(self, uri, name, controller, defaults={}, regex={}):
-        self._add('DELETE', uri, name, controller, defaults={}, regex={})
+        self._add('DELETE', uri, name, controller, defaults, regex)
 
     def getRouteCollection(self):
         return self.routes

@@ -86,6 +86,7 @@ def uri_creator(uri, regex, defaults):
             set_regex = regex[variable]
         
         # set default
+        print regex
         if variable in defaults:
             set_regex = set_regex + "|"
 
@@ -93,8 +94,8 @@ def uri_creator(uri, regex, defaults):
         
         uri = uri.replace(match, "(" + set_regex + ")")
         
-    # debug, put a ^ starts with for exact matching
-    uri = '^' + uri
+    # debug, put a ^ starts and $ ends with for exact matching
+    uri = '^' + uri + '$'
     return {
         'variables' : variables,
         'uri'       : uri
