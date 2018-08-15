@@ -6,10 +6,6 @@ A full fledged Tornado MVC framework [In-progress]
 .. image:: https://travis-ci.org/shubhodeep9/torn.svg?branch=master
     	 :target: https://travis-ci.org/shubhodeep9/torn
 
-Change log
-----------
-Fixed tornado missing issue.
-
 
 Versions
 --------
@@ -17,37 +13,34 @@ Versions
 torn-cli works with Python 2.4-3.5
 
 
-Installation [DEPRECATED]
+Installation [UPDATED]
 -------------------------
-
-::
-
-	pip install torn
-
-or
 
 ::
 
 	pip install git+https://github.com/shubhodeep9/torn.git
 
 
-Usage [DEPRECATED]
+Usage [UPDATED]
 ------------------
 
 ::
 
-    $ torn -h                     
-	Torn is tool for managing tornado web client.
+    $ torn                 
+	usage: torn [action [arguments]]
 
-	usage: torn command [arguments]
+	A full fledged MVC framework based on Tornado and Jinja2 templating
 
 	positional arguments:
-	  command     Specify what command to proceed
+	{new,run,controller,version}
+							Action to be performed with the application
 
 	optional arguments:
-	  -h, --help  show this help message and exit
+	-h, --help            show this help message and exit
 
-	The commands are:
-		new		Create a Tornado Application
-		run		run the app and start a Web server for development
-		api		create an API tornado application
+	The actions are:
+			new             Create a new torn app
+			run             Run the app and start a Web server for development
+			controller      Create a new controller
+			version         returns the current version of torn
+
