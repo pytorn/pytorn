@@ -62,8 +62,8 @@ setup(
     install_requires=["tornado>=4.3.0", "Jinja2", "pyyaml"],
     entry_points={
         'console_scripts': [
-            'torn=torn:main',
-            'torn-cli=torn:main'
+            'torn=torn.torn_cli:main',
+            'torn-cli=torn.torn_cli:main'
         ]
     },
     packages=["torn"],
