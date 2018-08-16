@@ -18,7 +18,7 @@ def settings(instance):
         instance.host = "http://localhost"
         if 'host' in config['web']:
             instance.host = config['web']['host']
-        instance.mode = config['devmode']
+        instance.debug = config['debug']
     return instance
 
 def routing(routes, request):
