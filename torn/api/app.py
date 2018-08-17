@@ -11,6 +11,7 @@ import pkgutil
 import inspect
 import logging
 import torn.plugins.log
+import webbrowser
 
 class Application:
     # the application class, to initialize the server
@@ -30,6 +31,7 @@ class Application:
             http_server = tornado.httpserver.HTTPServer(router)
             http_server.listen(self.port)
             torn.plugins.log.info("Server initiated. Visit " + self.host + ":" + str(self.port))
+            webbrowser.open(self.host + ":" + str(self.port))
             tornado.ioloop.IOLoop.current().start()
         except KeyboardInterrupt:
             print()
