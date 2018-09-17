@@ -1,3 +1,5 @@
+.. image:: https://raw.githubusercontent.com/andeladenaro/torn/master/resources/Banner.png
+
 torn     
 ====
 
