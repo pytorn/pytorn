@@ -5,8 +5,8 @@ Torn
 
 Torn, also known as PyTorn, is a full fledged Tornado MVC framework.
 
-.. image:: https://travis-ci.org/shubhodeep9/torn.svg?branch=master
-    	 :target: https://travis-ci.org/shubhodeep9/torn
+.. image:: https://travis-ci.org/pytorn/torn.svg?branch=master
+    	 :target: https://travis-ci.org/pytorn/torn
 
 
 Versions
