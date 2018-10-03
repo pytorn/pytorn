@@ -3,7 +3,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
-import sys , os
+import sys
 from torn.plugins import console
 
 def cli():
@@ -28,4 +28,3 @@ def cli():
         sys.exit(1)
     args = parser.parse_args()
     console.handler(args)
-    
