@@ -1,6 +1,7 @@
 """Module handles torn_cli actions and does the needful"""
 import os
-
+import requests
+import zipfile
 __version__ = "0.0.4"
 
 def handler(args):
@@ -8,7 +9,15 @@ def handler(args):
         runHandler()
     elif args.action[0] == 'new':
         #  for new app , cloning form main repository
-        os.system('git clone git@github.com:pytorn/app.git')
+        print('creating new app...')
+        url = 'https://github.com/pytorn/app/archive/master.zip'
+        r = requests.get(url , allow_redirects=True)
+        open('app.zip' , 'wb').write(r.content)
+        zip = zipfile.ZipFile("app.zip")
+        zip.extractall()
+        zip.close()
+        os.rename("app-master" , "app")
+        os.remove("app.zip")
     elif args.action[0] == 'version':
         print(__version__)                    
 
