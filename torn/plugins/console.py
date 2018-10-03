@@ -1,8 +1,16 @@
 """Module handles torn_cli actions and does the needful"""
 import os
+
+__version__ = "0.0.4"
+
 def handler(args):
     if args.action[0] == 'run':
         runHandler()
+    elif args.action[0] == 'new':
+        #  for new app , cloning form main repository
+        os.system('git clone git@github.com:pytorn/app.git')
+    elif args.action[0] == 'version':
+        print(__version__)                    
 
 def runHandler():
     try:
