@@ -8,9 +8,9 @@ def handler(args):
     if args.action[0] == 'run':
         runHandler()
     elif args.action[0].lower() == 'new':
-        runNew_cmd()
+        newHandler(args.name)
     elif args.action[0].lower() == 'version':
-        runVersion_cmd()                   
+        versionHandler()                   
 
 def runHandler():
     try:
@@ -22,7 +22,8 @@ def runHandler():
     except Exception as e:
         print 'Not a torn app'
 
-def runNew_cmd():
+def newHandler(name=None):
+    name = name or "app"
     #  for new app , cloning form main repository
     print('creating new app...')
     url = 'https://github.com/pytorn/app/archive/master.zip'
@@ -31,8 +32,8 @@ def runNew_cmd():
     zip = zipfile.ZipFile("app.zip")
     zip.extractall()
     zip.close()
-    os.rename("app-master" , "app")
+    os.rename("app-master" , name)
     os.remove("app.zip")
 
-def runVersion_cmd():
+def versionHandler():
     print(__version__)

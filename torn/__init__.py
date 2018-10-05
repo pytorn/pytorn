@@ -20,9 +20,14 @@ def cli():
                             usage='%(prog)s [action [arguments]]')
 
     parser.add_argument('action',
-                        nargs='+',
+                        nargs=1,
                         choices=['new', 'run', 'controller','version'],
                         help='Action to be performed with the application')
+
+    parser.add_argument('--name',
+                        type=str,
+                        default="sampleApp",
+                        help='Name for the given action')
     if len(sys.argv)==1:
         parser.print_help(sys.stderr)
         sys.exit(1)
