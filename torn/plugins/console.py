@@ -10,7 +10,9 @@ def handler(args):
     elif args.action[0].lower() == 'new':
         newHandler(args.name)
     elif args.action[0].lower() == 'version':
-        versionHandler()                   
+        versionHandler()
+    elif args.action[0].lower() == 'controller':
+        controllerHandler(args.name)                       
 
 def runHandler():
     try:
@@ -37,3 +39,10 @@ def newHandler(name=None):
 
 def versionHandler():
     print(__version__)
+
+
+def controllerHandler(name = None):
+    name = str(name) or "User"
+    print('creating controller '+ name + '...' )
+    s = "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\nfrom torn.api import Controller\nclass "+ name +"Controller(Controller):\n\tdef get(self):\n\t\tpass"
+    open(name + "Controller" , 'w').write(s)
