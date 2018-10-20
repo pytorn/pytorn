@@ -22,7 +22,7 @@ def runHandler():
         else:
             raise Exception
     except Exception as e:
-        print 'Not a torn app'
+        print('Not a torn app', e)
 
 def newHandler(name=None):
     name = name or "app"

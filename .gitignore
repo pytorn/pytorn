@@ -60,3 +60,12 @@ test.py
 torn/structure/torn/
 
 .vscode
+
+#Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
