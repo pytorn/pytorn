@@ -29,7 +29,7 @@ def routing(routes, request):
 
     # iterate through routes to match
     args = {}
-    for name, route in routes.iteritems():
+    for name, route in routes.items():
         if route['path'] == '^':
             # this section exists because regex doesn't work for null character as desired
             if path == '':
