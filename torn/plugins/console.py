@@ -5,13 +5,14 @@ import zipfile
 __version__ = "0.0.4"
 
 def handler(args):
-    if args.action[0] == 'run':
+    action = args.action[0]
+    if action == 'run':
         runHandler()
-    elif args.action[0].lower() == 'new':
+    elif action.lower() == 'new':
         newHandler(args.name)
-    elif args.action[0].lower() == 'version':
+    elif action.lower() == 'version':
         versionHandler()
-    elif args.action[0].lower() == 'controller':
+    elif action.lower() == 'controller':
         controllerHandler(args.name)                       
 
 def runHandler():

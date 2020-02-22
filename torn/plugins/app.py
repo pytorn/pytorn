@@ -70,7 +70,7 @@ def uri_creator(uri, regex, defaults):
     uri = uri.strip('/')
 
     # take out variables in uri
-    matches = re.findall('{[a-zA-Z0-9\_]+}', uri)
+    matches = re.findall(r"\{[a-zA-Z0-9\_]+}", uri)
     default_regex = '[a-zA-Z0-9]+'
     
     variables = []
@@ -101,5 +101,5 @@ def uri_creator(uri, regex, defaults):
     }
 
 def is_static(file):
-    static_extentions = re.findall('.+(\.css|\.js|\.ttf|\.png|\.jpg|\.gif|\.ico|robots\.txt)$', file)
+    static_extentions = re.findall(r".+(\.css|\.js|\.ttf|\.png|\.jpg|\.gif|\.ico|robots\.txt)$", file)
     return len(static_extentions)

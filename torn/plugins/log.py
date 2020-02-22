@@ -3,7 +3,6 @@
 
 """Log consists of functions required to display a log on the terminal."""
 
-from __future__ import print_function
 from datetime import datetime
 import torn.plugins.colors
 
