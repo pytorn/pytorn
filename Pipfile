@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 tornado = "*"
+requests = "*"
+jinja2 = "*"
+pyyaml = "*"
 
 [dev-packages]
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
 import os
 import tornado.web
 import tornado.ioloop
@@ -61,7 +60,7 @@ class Middleware:
         pass
 
 
-    def in_exceptions(request):
+    def in_exceptions(self, request):
         # traverse the array and check if the url exists \
         # if does, then terminate the process
         for excepts in self._exceptions:
@@ -72,7 +71,7 @@ class Middleware:
         return False
 
 
-def load_controllers(path):
+def load_controllers(path: str):
     output = []
     for loader, name, is_pkg in pkgutil.walk_packages(path):
         module = loader.find_module(name).load_module(name)

@@ -4,6 +4,8 @@
 
 import tornado.web
 
+HANDLABLE_ERRORS = [403, 405, 404, 500, 503]
+
 class TornException(tornado.web.HTTPError):
     """Torn parent exception class.
     It can be thrown for uncertain errors.
@@ -50,7 +52,7 @@ class TornErrorHandler(tornado.web.RequestHandler):
         self.status_code = status_code
 
     def write_error(self, status_code, **kwargs):
-        if self.status_code in [403, 405, 404, 500, 503]:
+        if self.status_code in HANDLABLE_ERRORS:
             self.set_status(self.status_code)
             self.write('Error %s' % self.status_code)
         else:

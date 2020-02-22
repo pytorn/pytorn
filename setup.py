@@ -48,6 +48,8 @@ try:
 except:
     long_description = ''
 
+install_requires = ["tornado>=4.3.0", "Jinja2", "pyyaml" , "requests"]
+test_requires = ["pytest"]
 
 setup(
     name='torn',
@@ -59,7 +61,12 @@ setup(
     author_email='shubhodeep9@gmail.com',
     url='https://github.com/pytorn/torn',
     license='Apache License, Version 2.0',
-    install_requires=["tornado>=4.3.0", "Jinja2", "pyyaml" , "requests"],
+    install_requires=install_requires,
+    test_require=test_requires,
+    extra_requires={
+        "test": test_requires,
+        "all": install_requires + test_requires
+    },
     entry_points={
         'console_scripts': [
             'torn=torn.torn_cli:main',
