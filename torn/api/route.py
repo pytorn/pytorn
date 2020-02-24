@@ -128,7 +128,7 @@ class Router(tornado.routing.Router):
                 # to serve static files
                 return self.app.get_handler_delegate(request, tornado.web.StaticFileHandler, target_kwargs=dict(path=os.getcwd() + "/Assets"), path_kwargs=dict(path=request.path.strip('/')))
             else:
-                route: Route = self.routes.match(request)
+                route = self.routes.match(request)
                 torn.plugins.log.info(request.method + "\t" + request.path, code=str(200))
                 return self.app.get_handler_delegate(request, route.get_controller(), path_kwargs=route.get_args(request))
         except tornado.web.HTTPError as e:
