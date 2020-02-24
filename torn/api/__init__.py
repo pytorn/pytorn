@@ -4,6 +4,7 @@ import tornado.web
 import inspect
 import os
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from torn.exception import TornMethodNotAllowed
 
 # class Controller will be an abstract class with implemented methods for implemented Controller
 class Controller(tornado.web.RequestHandler):
@@ -25,3 +26,24 @@ class Controller(tornado.web.RequestHandler):
 
         template = env.get_template(template)
         return self.finish(template.render(data))
+
+    def get(self):
+        raise TornMethodNotAllowed
+
+    def post(self):
+        raise TornMethodNotAllowed
+
+    def delete(self):
+        raise TornMethodNotAllowed
+
+    def put(self):
+        raise TornMethodNotAllowed
+
+    def patch(self):
+        raise TornMethodNotAllowed
+
+    def head(self):
+        raise TornMethodNotAllowed
+
+    def options(self):
+        raise TornMethodNotAllowed
