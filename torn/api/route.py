@@ -4,7 +4,7 @@
 import tornado.routing
 import torn.plugins.app
 import torn.api
-from torn.exception import TornErrorHandler, TornNotFoundError
+from torn.exception import TornErrorHandler, TornNotFoundError, TornUrlNameNotFound
 import tornado.web
 import torn.plugins
 import re
@@ -20,6 +20,7 @@ class Route:
         self.uri_vars = torn.plugins.app.get_uri_variables(uri)
         self.params = {}
         self.default_vals = {}
+        self.__name = None
 
     def __make_params(self, params):
         DEFAULT_REGEX = '[a-zA-Z0-9]+';
@@ -35,6 +36,13 @@ class Route:
     def defaults(self, value):
         self.default_vals = value
         return self
+
+    def name(self, value):
+        self.__name = value
+        return self
+
+    def get_name(self):
+        return self.__name
 
     def get_controller(self):
         return self.controller
@@ -81,6 +89,7 @@ class RouteCollection:
 
     def __init__(self):
         self.routes = []
+        self.named_routes = {}
 
     def add_route(self, route: Route):
         self.routes.append(route)
@@ -92,6 +101,17 @@ class RouteCollection:
         
         raise TornNotFoundError
 
+    def map_names(self):
+        for route in self.routes:
+            name = route.get_name()
+            if route.get_name():
+                self.named_routes[route.get_name()] = route
+
+    def get_route_by_name(self, name: str):
+        if name in self.named_routes:
+            return self.named_routes[name]
+        raise TornUrlNameNotFound
+
 class Routing:
     def __init__(self):
         self.routes = RouteCollection()
@@ -101,7 +121,9 @@ class Routing:
         self.routes.add_route(route)
         return route
 
+
     def getRouteCollection(self):
+        self.routes.map_names()
         return self.routes
 
 class Router(tornado.routing.Router):
@@ -110,15 +132,13 @@ class Router(tornado.routing.Router):
         self.routes = route.getRouteCollection()
 
     def url_for(self, name, kwargs=dict()):
-        if name not in self.routes:
-            return ""
         try:
-            route = self.routes[name]
-            uri = route['uri']
-            for variable in route['variables']:
+            route = self.routes.get_route_by_name(name)
+            uri = route.uri
+            for variable in route.uri_vars:
                 uri = uri.replace("{" + variable + "}", kwargs[variable])
             return uri
-        except:
+        except Exception as e:
             return ""
 
     def find_handler(self, request, **kwargs):

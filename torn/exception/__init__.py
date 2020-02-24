@@ -47,6 +47,10 @@ class TornMethodNotAllowed(tornado.web.HTTPError):
     def __init__(self):
         super(TornMethodNotAllowed, self).__init__(status_code=405, log_message="Response 405: Method Not Allowed.")
 
+class TornUrlNameNotFound(Exception):
+    def __init__(self):
+        super().__init__("URL not found for given name")
+
 class TornErrorHandler(tornado.web.RequestHandler):
     def initialize(self, status_code):
         self.status_code = status_code

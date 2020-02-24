@@ -1,9 +1,12 @@
 import unittest
-from torn.api.route import Routing
+from torn.api.route import Routing, Router
 from torn.api import Controller
 from torn.exception import TornNotFoundError
 
 class DummyController(Controller):
+    pass
+
+class DummyTornadoApplication():
     pass
 
 def create_dummy_http_request(tpath, tmethod):
@@ -84,6 +87,24 @@ class RoutingTests(unittest.TestCase):
         args = route.get_args(new_request)
         
         assert args['userId'] == '123' and args['type'] == 'photo'
+
+    def test_url_name(self):
+        routing = Routing()
+        routing.add("/", DummyController).name("index")
+        routing.add("/user/{userId}", DummyController).name("userHandler")
+
+        router = Router(DummyTornadoApplication(), routing)
+        uri = router.url_for("index")
+
+        assert uri == "/"
+
+        uri = router.url_for("userHandler", { 'userId': '123' })
+
+        assert uri == "/user/123"
+
+        uri = router.url_for("nonExists")
+
+        assert uri == ""
 
 
 if __name__ == "__main__":
