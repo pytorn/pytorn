@@ -10,15 +10,27 @@ from torn.exception import TornInternalError, TornNotFoundError, TornMethodNotAl
 
 def settings(instance):
     """Definition to set settings from config file to the app instance."""
-    with open(instance.root_dir + '/Config/config.yml') as config:
-        config = yaml.load(config)
-        instance.name = config['name']
-        instance.port = config['web']['port']
-        # default host
-        instance.host = "http://localhost"
-        if 'host' in config['web']:
-            instance.host = config['web']['host']
-        instance.debug = config['debug']
+    # default values
+    instance.name = "Torn App"
+    instance.port = 8000
+    instance.host = "http://localhost"
+    instance.debug = True
+    try:
+        with open(instance.root_dir + '/Config/config.yml') as config:
+            config = yaml.safe_load(config)
+
+            # read from config values
+            if 'name' in config:
+                instance.name = config['name']
+            if 'web' in config:
+                if 'port' in config['web']:
+                    instance.port = config['web']['port']
+                if 'host' in config['web']:
+                    instance.host = config['web']['host']
+            if 'debug' in config:
+                instance.debug = config['debug']
+    except Exception as e:
+        print("Error in reading from config file / maybe missing")
     return instance
 
 def uri_creator(uri, params, defaults):
