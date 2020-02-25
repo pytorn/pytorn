@@ -1,0 +1,8 @@
+name: app
+
+web:
+  host: http://localhost
+  port: 7080
+
+debug: False
+devmode: dev
