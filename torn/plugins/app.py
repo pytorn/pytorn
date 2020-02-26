@@ -14,21 +14,18 @@ def settings(instance):
     instance.name = "Torn App"
     instance.port = 8000
     instance.host = "http://localhost"
-    instance.debug = True
+    instance.debug = False
+    instance.autoreload = False
     try:
         with open(instance.root_dir + '/Config/config.yml') as config:
             config = yaml.safe_load(config)
 
             # read from config values
-            if 'name' in config:
-                instance.name = config['name']
-            if 'web' in config:
-                if 'port' in config['web']:
-                    instance.port = config['web']['port']
-                if 'host' in config['web']:
-                    instance.host = config['web']['host']
-            if 'debug' in config:
-                instance.debug = config['debug']
+            instance.name = config.get('name', instance.name)
+            instance.port = config.get('web', {}).get('port', instance.port)
+            instance.host = config.get('web', {}).get('host', instance.host)
+            instance.debug = config.get('debug', instance.debug)
+            instance.autoreload = config.get('autoreload', instance.autoreload)
     except Exception as e:
         print("Error in reading from config file / maybe missing")
     return instance

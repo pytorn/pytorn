@@ -23,9 +23,11 @@ class Application:
 
 
     # method to execute the application
-    def run(self, routes, autoreload=True):
+    def run(self, routes, **settings):
         try:
-            application = tornado.web.Application(autoreload=autoreload)
+            autoreload = settings.get('autoreload', self.autoreload)
+            debug = settings.get('debug', self.debug)
+            application = tornado.web.Application(autoreload=autoreload, debug=debug)
             router = torn.api.route.Router(application, routes)
             http_server = tornado.httpserver.HTTPServer(router)
             http_server.listen(self.port)
