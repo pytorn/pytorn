@@ -17,7 +17,8 @@ class AppPluginsTests(unittest.TestCase):
         assert instance.host == "http://localhost" and \
             instance.port == 7080 and \
             instance.debug == False and \
-            instance.name == "app"
+            instance.name == "app" and \
+            instance.autoreload == True
 
     def test_settings_default(self):
         class DummyApplication:
@@ -29,5 +30,6 @@ class AppPluginsTests(unittest.TestCase):
 
         assert instance.host == "http://localhost" and \
             instance.port == 8000 and \
-            instance.debug == True and \
-            instance.name == "Torn App"
+            instance.debug == False and \
+            instance.name == "Torn App" and \
+            instance.autoreload == False
