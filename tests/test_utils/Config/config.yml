@@ -5,4 +5,4 @@ web:
   port: 7080
 
 debug: False
-devmode: dev
+autoreload: True
